@@ -114,7 +114,7 @@ function NoticiaPage() {
           <ellipse cx="100" cy="100" rx="90" ry="70" fill="currentColor" />
         </svg>
 
-        <div className="container-narrow relative pt-36 md:pt-40 pb-24 md:pb-32 text-[color:var(--paper)]">
+        <div className="container-narrow relative pt-28 md:pt-32 pb-14 md:pb-16 text-[color:var(--paper)]">
           <nav aria-label="Breadcrumb" className="text-xs text-[color:var(--paper)]/85">
             <ol className="flex flex-wrap items-center gap-1">
               <li>
@@ -267,7 +267,7 @@ function NoticiaPage() {
           <div className="container-narrow">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Galeria</p>
             <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">
-              Registros desta ação
+              Galeria de fotos
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
               Confira alguns momentos registrados durante a realização desta atividade.
