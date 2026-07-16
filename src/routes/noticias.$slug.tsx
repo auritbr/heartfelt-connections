@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { news, formatDate } from "@/lib/site-data";
+import { news, formatDate, type NewsItem, type NewsPhoto } from "@/lib/site-data";
 import { Lightbox } from "@/components/ui/Lightbox";
 import {
   ArrowLeft,
