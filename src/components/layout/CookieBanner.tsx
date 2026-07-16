@@ -92,9 +92,9 @@ export function CookieBanner({
             <div className="mt-4 space-y-3">
               {([
                 { k: "necessary", title: "Cookies necessários", desc: "Essenciais para o funcionamento do site. Sempre ativos.", locked: true },
-                { k: "analytics", title: "Cookies de análise", desc: "Ajudam a entender como o site é utilizado." },
-                { k: "functionality", title: "Cookies de funcionalidade", desc: "Recursos extras e personalizações." },
-                { k: "marketing", title: "Cookies de marketing", desc: "Comunicações institucionais e campanhas." },
+                { k: "analytics", title: "Cookies de análise", desc: "Ajudam a entender como o site é utilizado.", locked: false },
+                { k: "functionality", title: "Cookies de funcionalidade", desc: "Recursos extras e personalizações.", locked: false },
+                { k: "marketing", title: "Cookies de marketing", desc: "Comunicações institucionais e campanhas.", locked: false },
               ] as const).map((c) => (
                 <label key={c.k} className="flex items-start justify-between gap-4 rounded-lg border p-3">
                   <span>
