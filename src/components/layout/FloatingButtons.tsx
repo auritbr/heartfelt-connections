@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Accessibility, X, Cookie, MessageCircle, ArrowUp } from "lucide-react";
 import { AccessibilityPanel } from "./AccessibilityPanel";
-import { CookieBanner, CookiePreferences } from "./CookieBanner";
+import { CookieBanner } from "./CookieBanner";
+import type { CookiePreferences } from "./CookieBanner";
 import { site } from "@/lib/site-data";
 
 export function FloatingButtons() {
