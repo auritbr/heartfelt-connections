@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, CheckCircle2, MapPin, TreePine } from "lucide-react";
+import { ArrowRight, Compass, Sprout, Target } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { timeline } from "@/lib/site-data";
 
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/quem-somos/")({
   head: () => ({
     meta: [
       { title: "Quem Somos — Instituto Raízes do Futuro" },
-      { name: "description", content: "Trajetória, missão, valores e território de atuação do Instituto." },
+      { name: "description", content: "Trajetória, missão, visão e valores do Instituto." },
       { property: "og:title", content: "Quem Somos — Instituto Raízes do Futuro" },
       { property: "og:description", content: "Uma trajetória cultivada com a comunidade." },
       { property: "og:url", content: "/quem-somos" },
@@ -16,6 +16,27 @@ export const Route = createFileRoute("/quem-somos/")({
   }),
   component: QuemSomos,
 });
+
+const MVV = [
+  {
+    key: "missao",
+    label: "Missão",
+    icon: Target,
+    text: "Promover cultura, educação ambiental e participação comunitária para fortalecer territórios mais conscientes, justos e sustentáveis.",
+  },
+  {
+    key: "visao",
+    label: "Visão",
+    icon: Compass,
+    text: "Ser referência na integração entre cultura, conhecimento, cidadania e preservação ambiental, junto com as comunidades atendidas.",
+  },
+  {
+    key: "valores",
+    label: "Valores",
+    icon: Sprout,
+    text: "Respeito à vida, diversidade, participação comunitária, transparência, educação transformadora e valorização dos saberes locais.",
+  },
+];
 
 function QuemSomos() {
   return (
@@ -30,127 +51,174 @@ function QuemSomos() {
 
       <section className="section-y">
         <div className="container-narrow grid gap-10 lg:grid-cols-2 lg:items-center">
-          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&auto=format&fit=crop" alt="Encontro comunitário" className="rounded-2xl h-[440px] w-full object-cover" loading="lazy" />
+          <img
+            src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&auto=format&fit=crop"
+            alt="Encontro comunitário"
+            className="rounded-2xl h-[440px] w-full object-cover"
+            loading="lazy"
+          />
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--moss)]">Nossa história</p>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">Nascido da mobilização, cultivado pela comunidade</h2>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">
+              Nascido da mobilização, cultivado pela comunidade
+            </h2>
             <p className="mt-4 text-muted-foreground">
-              O Instituto Raízes do Futuro nasceu da mobilização de educadores, agentes culturais, ambientalistas e moradores comprometidos com a preservação do território e com o acesso à cultura. Ao longo de sua trajetória, consolidou-se como espaço de aprendizagem, participação social e valorização dos saberes locais.
+              O Instituto Raízes do Futuro nasceu da mobilização de educadores, agentes culturais, ambientalistas e
+              moradores comprometidos com a preservação do território e com o acesso à cultura. Ao longo de sua trajetória,
+              consolidou-se como espaço de aprendizagem, participação social e valorização dos saberes locais.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Linha do tempo */}
-      <section className="section-y bg-[color:var(--paper)]">
-        <div className="container-narrow">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--moss)]">Trajetória</p>
-          <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">Linha do tempo</h2>
-          <ol className="mt-10 relative border-l-2 border-[color:var(--moss)]/40 pl-6 space-y-8">
-            {timeline.map((t) => (
-              <li key={t.year} className="relative">
-                <span className="absolute -left-[34px] top-1 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--forest)] text-[color:var(--paper)]">
-                  <TreePine className="h-3 w-3" aria-hidden />
-                </span>
-                <p className="font-display text-lg font-bold text-[color:var(--forest)]">{t.year} — {t.title}</p>
-                <p className="text-sm text-muted-foreground mt-1">{t.desc}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Missão / Visão — molduras finas com aba */}
-      <section className="section-y">
-        <div className="container-narrow grid gap-8 md:grid-cols-2">
-          {[
-            {
-              t: "Missão",
-              d: "Promover cultura, educação ambiental e participação comunitária para fortalecer territórios mais conscientes, justos e sustentáveis.",
-            },
-            {
-              t: "Visão",
-              d: "Ser referência na integração entre cultura, conhecimento, cidadania e preservação ambiental, junto com as comunidades atendidas.",
-            },
-          ].map((b) => (
-            <div key={b.t} className="relative rounded-2xl border-2 border-[color:var(--moss)]/40 bg-transparent p-8 pt-10">
-              <span className="absolute -top-3.5 left-6 inline-flex items-center rounded-full bg-[color:var(--forest)] px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--paper)]">
-                {b.t}
-              </span>
-              <p className="text-sm md:text-base leading-relaxed text-foreground/85">{b.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Valores — duas colunas com ícones ambientais */}
-      <section className="section-y bg-[color:var(--paper)] paper-texture">
-        <div className="container-narrow">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Nossos valores</p>
+      {/* Missão, Visão e Valores — composição editorial orgânica */}
+      <section className="section-y bg-[color:var(--paper)] paper-texture relative overflow-hidden">
+        <svg
+          aria-hidden
+          className="pointer-events-none absolute -top-16 -right-24 h-[420px] w-[420px] text-[color:var(--moss)]/10"
+          viewBox="0 0 200 200"
+        >
+          <path
+            d="M100 10 C 150 30 180 70 170 120 C 160 170 110 190 60 170 C 20 150 10 100 30 60 C 50 25 80 5 100 10 Z"
+            fill="currentColor"
+          />
+        </svg>
+        <div className="container-narrow relative">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Fundamentos</p>
           <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">
-            Princípios que orientam a nossa atuação
+            Missão, visão e valores
           </h2>
-          <ul className="mt-8 grid gap-4 md:grid-cols-2">
-            {[
-              "Respeito à vida e à biodiversidade",
-              "Responsabilidade socioambiental",
-              "Diversidade e inclusão",
-              "Participação comunitária",
-              "Transparência e ética",
-              "Educação transformadora",
-              "Valorização dos saberes locais",
-              "Cuidado com o território",
-            ].map((v) => (
-              <li key={v} className="flex items-start gap-3 rounded-xl border bg-white p-4">
-                <CheckCircle2 className="h-5 w-5 mt-0.5 text-[color:var(--moss)] shrink-0" aria-hidden />
-                <span className="text-sm text-foreground/90">{v}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Três raízes que sustentam a nossa atuação e orientam cada projeto realizado com as comunidades.
+          </p>
 
+          <div className="mt-12 relative">
+            {/* linha orgânica conectando os três blocos */}
+            <svg
+              aria-hidden
+              viewBox="0 0 1200 40"
+              preserveAspectRatio="none"
+              className="hidden md:block absolute top-6 left-0 right-0 h-10 w-full text-[color:var(--moss)]/40"
+            >
+              <path
+                d="M 40 20 C 250 -10 450 40 600 20 C 750 0 950 40 1160 20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeDasharray="4 6"
+              />
+            </svg>
 
-      {/* Território */}
-      <section className="section-y bg-[color:var(--leaf)]/40">
-        <div className="container-narrow grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--moss)]">Território</p>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">Onde estamos presentes</h2>
-            <p className="mt-3 text-muted-foreground">Atuamos em 20 comunidades, entre áreas urbanas e rurais, em parceria com escolas, universidades e coletivos.</p>
-            <ul className="mt-5 grid grid-cols-2 gap-2 text-sm">
-              {["Comunidade Vale Verde", "Vila do Rio", "Sítio das Sementes", "Bairro Pedra Alta", "Escola Aroeira", "Escola Ipê"].map((c) => (
-                <li key={c} className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[color:var(--moss)]" /> {c}</li>
+            <div className="grid gap-8 md:grid-cols-3">
+              {MVV.map(({ key, label, icon: Icon, text }, i) => (
+                <article key={key} className="relative">
+                  <div className="relative mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--forest)] text-[color:var(--paper)] shadow-md">
+                    <Icon className="h-5 w-5" aria-hidden />
+                    <span className="absolute -bottom-1 -right-1 grid h-5 w-5 place-items-center rounded-full bg-[color:var(--ochre)] text-[10px] font-bold text-[color:var(--forest)]">
+                      {i + 1}
+                    </span>
+                  </div>
+                  <div className="mt-6 rounded-[28px] border border-[color:var(--moss)]/25 bg-white p-6 md:p-7 shadow-sm">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">
+                      {label}
+                    </p>
+                    <p className="mt-3 text-sm md:text-base leading-relaxed text-foreground/85">{text}</p>
+                  </div>
+                </article>
               ))}
-            </ul>
-          </div>
-          <div className="rounded-2xl overflow-hidden border bg-card aspect-[4/3]">
-            <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&q=80&auto=format&fit=crop" alt="Mapa ilustrativo do território de atuação" className="h-full w-full object-cover" loading="lazy" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Reconhecimentos */}
-      <section className="section-y">
+      {/* Linha do tempo — trilha orgânica */}
+      <section className="section-y relative overflow-hidden">
+        <div className="container-narrow relative">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Trajetória</p>
+          <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">
+            Nossa linha do tempo
+          </h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Marcos que constroem, ano após ano, a história do Instituto e do território.
+          </p>
+
+          <div className="mt-14 relative">
+            {/* Trilha orgânica vertical */}
+            <svg
+              aria-hidden
+              viewBox="0 0 20 800"
+              preserveAspectRatio="none"
+              className="absolute left-4 md:left-1/2 top-0 h-full w-6 -translate-x-1/2 text-[color:var(--moss)]/50"
+            >
+              <path
+                d="M 10 0 C 2 100 18 200 10 300 C 2 400 18 500 10 600 C 4 700 14 780 10 800"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+            </svg>
+
+            <ol className="relative space-y-10">
+              {timeline.map((t, i) => {
+                const left = i % 2 === 0;
+                return (
+                  <li key={t.year} className="relative md:grid md:grid-cols-2 md:gap-10">
+                    {/* Nó/semente */}
+                    <span
+                      aria-hidden
+                      className="absolute left-4 md:left-1/2 top-2 grid h-4 w-4 -translate-x-1/2 place-items-center rounded-full bg-[color:var(--forest)] ring-4 ring-background"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--ochre)]" />
+                    </span>
+
+                    <div className={`pl-12 md:pl-0 ${left ? "md:pr-10 md:text-right" : "md:col-start-2 md:pl-10"}`}>
+                      <p className="font-display text-2xl font-extrabold text-[color:var(--ochre)]">{t.year}</p>
+                      <h3 className="mt-1 font-display text-lg font-bold text-[color:var(--forest)]">{t.title}</h3>
+                      <p className="mt-2 text-sm text-muted-foreground max-w-md md:inline-block">{t.desc}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA final */}
+      <section className="pb-24">
         <div className="container-narrow">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--moss)]">Reconhecimentos</p>
-          <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">Prêmios, selos e certificações</h2>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {["Certificação Ponto de Cultura", "Selo Educação Ambiental", "Prêmio Território Vivo 2023", "Rede Nacional de Bibliotecas"].map((r) => (
-              <div key={r} className="rounded-2xl border bg-card p-5">
-                <Award className="h-6 w-6 text-[color:var(--ochre)]" />
-                <p className="mt-3 font-semibold text-[color:var(--forest)]">{r}</p>
+          <div className="relative overflow-hidden rounded-3xl border bg-[color:var(--leaf)]/30 p-8 md:p-12 text-center">
+            <svg
+              aria-hidden
+              className="pointer-events-none absolute -bottom-10 -right-10 h-56 w-56 text-[color:var(--moss)]/15"
+              viewBox="0 0 200 200"
+            >
+              <path d="M100 10 C 150 30 180 70 170 120 C 160 170 110 190 60 170 C 20 150 10 100 30 60 C 50 25 80 5 100 10 Z" fill="currentColor" />
+            </svg>
+            <div className="relative">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">
+                Faça parte dessa trajetória
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-sm md:text-base text-muted-foreground">
+                Conheça nossos projetos, acompanhe nossas ações e aproxime-se de uma iniciativa que cultiva cultura,
+                educação ambiental e participação comunitária.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <Link
+                  to="/noticias"
+                  className="inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]"
+                >
+                  Ver projetos <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/contato"
+                  className="inline-flex items-center gap-2 rounded-full border border-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--forest)] hover:bg-white"
+                >
+                  Entrar em contato
+                </Link>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      <section className="section-y">
-        <div className="container-narrow text-center">
-          <Link to="/quem-somos/equipe" className="inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-6 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">
-            Conheça nossa equipe <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </section>
     </>
