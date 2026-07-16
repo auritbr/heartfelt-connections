@@ -60,28 +60,56 @@ function QuemSomos() {
         </div>
       </section>
 
-      {/* Missão / Visão / Valores */}
+      {/* Missão / Visão — molduras finas com aba */}
       <section className="section-y">
-        <div className="container-narrow grid gap-6 lg:grid-cols-3">
+        <div className="container-narrow grid gap-8 md:grid-cols-2">
           {[
-            { t: "Missão", d: "Promover cultura, educação ambiental e participação comunitária para fortalecer territórios mais conscientes, justos e sustentáveis." },
-            { t: "Visão", d: "Ser referência na integração entre cultura, conhecimento, cidadania e preservação ambiental." },
-            { t: "Valores", d: null as null | string[] },
-          ].map((b, i) => (
-            <article key={b.t} className={`rounded-2xl border p-6 ${i === 0 ? "bg-[color:var(--forest)] text-[color:var(--paper)]" : "bg-card"}`}>
-              <h3 className={`font-display text-2xl font-bold ${i === 0 ? "" : "text-[color:var(--forest)]"}`}>{b.t}</h3>
-              {b.d && <p className={`mt-3 text-sm ${i === 0 ? "text-[color:var(--paper)]/90" : "text-muted-foreground"}`}>{b.d}</p>}
-              {!b.d && (
-                <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                  {["Respeito à vida", "Responsabilidade socioambiental", "Diversidade", "Participação comunitária", "Transparência", "Educação transformadora", "Valorização dos saberes locais"].map((v) => (
-                    <li key={v} className="flex gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 text-[color:var(--moss)]" /> {v}</li>
-                  ))}
-                </ul>
-              )}
-            </article>
+            {
+              t: "Missão",
+              d: "Promover cultura, educação ambiental e participação comunitária para fortalecer territórios mais conscientes, justos e sustentáveis.",
+            },
+            {
+              t: "Visão",
+              d: "Ser referência na integração entre cultura, conhecimento, cidadania e preservação ambiental, junto com as comunidades atendidas.",
+            },
+          ].map((b) => (
+            <div key={b.t} className="relative rounded-2xl border-2 border-[color:var(--moss)]/40 bg-transparent p-8 pt-10">
+              <span className="absolute -top-3.5 left-6 inline-flex items-center rounded-full bg-[color:var(--forest)] px-4 py-1 text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--paper)]">
+                {b.t}
+              </span>
+              <p className="text-sm md:text-base leading-relaxed text-foreground/85">{b.d}</p>
+            </div>
           ))}
         </div>
       </section>
+
+      {/* Valores — duas colunas com ícones ambientais */}
+      <section className="section-y bg-[color:var(--paper)] paper-texture">
+        <div className="container-narrow">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Nossos valores</p>
+          <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">
+            Princípios que orientam a nossa atuação
+          </h2>
+          <ul className="mt-8 grid gap-4 md:grid-cols-2">
+            {[
+              "Respeito à vida e à biodiversidade",
+              "Responsabilidade socioambiental",
+              "Diversidade e inclusão",
+              "Participação comunitária",
+              "Transparência e ética",
+              "Educação transformadora",
+              "Valorização dos saberes locais",
+              "Cuidado com o território",
+            ].map((v) => (
+              <li key={v} className="flex items-start gap-3 rounded-xl border bg-white p-4">
+                <CheckCircle2 className="h-5 w-5 mt-0.5 text-[color:var(--moss)] shrink-0" aria-hidden />
+                <span className="text-sm text-foreground/90">{v}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
 
       {/* Território */}
       <section className="section-y bg-[color:var(--leaf)]/40">
