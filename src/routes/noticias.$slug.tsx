@@ -274,7 +274,7 @@ function NoticiaPage() {
             </p>
 
             <div className="mt-8 grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {item.gallery.map((p, i) => (
+              {item.gallery.map((p: NewsPhoto, i: number) => (
                 <button
                   key={i}
                   type="button"
