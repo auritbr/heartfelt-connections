@@ -99,9 +99,9 @@ function RootShell({ children }: { children: ReactNode }) {
       <body>
         {children}
         {/* VLibras widget mount point — script above initializes it */}
-        <div vw="true" className="enabled">
-          <div vw-access-button="true" className="active"></div>
-          <div vw-plugin-wrapper="true">
+        <div {...({ vw: "true" } as Record<string, string>)} className="enabled">
+          <div {...({ "vw-access-button": "true" } as Record<string, string>)} className="active"></div>
+          <div {...({ "vw-plugin-wrapper": "true" } as Record<string, string>)}>
             <div className="vw-plugin-top-wrapper"></div>
           </div>
         </div>
