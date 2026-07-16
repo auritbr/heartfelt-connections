@@ -51,24 +51,60 @@ function ContatoPage() {
       />
 
       <section className="section-y">
-        <div className="container-narrow">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {[
-              { icon: MapPin, title: "Endereço", value: site.address },
-              { icon: Phone, title: "Telefone", value: site.phone },
-              { icon: MessageCircle, title: "WhatsApp", value: `+${site.whatsapp}` },
-              { icon: Mail, title: "E-mail", value: site.email },
-              { icon: Clock, title: "Atendimento", value: site.hours },
-            ].map((c) => (
-              <div key={c.title} className="rounded-2xl border bg-card p-5">
-                <c.icon className="h-5 w-5 text-[color:var(--moss)]" />
-                <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">{c.title}</p>
-                <p className="mt-0.5 text-sm text-[color:var(--forest)]">{c.value}</p>
+        <div className="container-narrow grid gap-8 lg:grid-cols-[1.05fr_1fr]">
+          {/* Coluna esquerda: informações sobre fotografia ambiental */}
+          <aside className="relative overflow-hidden rounded-3xl bg-[color:var(--forest)] text-[color:var(--paper)] p-6 md:p-10 min-h-[560px]">
+            <img
+              src="https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1600&q=80&auto=format&fit=crop"
+              alt=""
+              aria-hidden
+              className="absolute inset-0 h-full w-full object-cover opacity-30"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--forest)]/85 via-[color:var(--forest)]/70 to-[color:var(--forest)]/90" />
+            <svg viewBox="0 0 200 60" aria-hidden className="relative h-6 w-32 text-[color:var(--ochre)] mb-4">
+              <path d="M2 30 C 40 5 80 55 120 30 C 160 5 195 40 198 30" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" />
+            </svg>
+            <div className="relative">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--leaf)]">Fale conosco</p>
+              <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold">
+                Informações de contato
+              </h2>
+              <p className="mt-3 text-sm text-[color:var(--paper)]/85 max-w-md">
+                Estamos disponíveis para receber sugestões, propostas de parceria e convites para atividades no território.
+              </p>
+              <ul className="mt-8 space-y-4 text-sm">
+                {[
+                  { icon: MapPin, label: "Endereço", value: site.address },
+                  { icon: Phone, label: "Telefone", value: site.phone },
+                  { icon: MessageCircle, label: "WhatsApp", value: `+${site.whatsapp}` },
+                  { icon: Mail, label: "E-mail", value: site.email },
+                  { icon: Clock, label: "Atendimento", value: site.hours },
+                ].map((c) => (
+                  <li key={c.label} className="flex items-start gap-3">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 backdrop-blur">
+                      <c.icon className="h-4 w-4 text-[color:var(--leaf)]" aria-hidden />
+                    </span>
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-widest text-[color:var(--leaf)]">{c.label}</p>
+                      <p className="mt-0.5 text-[color:var(--paper)]">{c.value}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <p className="text-[11px] font-semibold uppercase tracking-widest text-[color:var(--leaf)]">Redes sociais</p>
+                <div className="mt-3 flex gap-2">
+                  <a href={site.social.instagram} aria-label="Instagram" className="rounded-full bg-white/10 p-2.5 hover:bg-white/20"><Instagram className="h-4 w-4" /></a>
+                  <a href={site.social.facebook} aria-label="Facebook" className="rounded-full bg-white/10 p-2.5 hover:bg-white/20"><Facebook className="h-4 w-4" /></a>
+                  <a href={site.social.youtube} aria-label="YouTube" className="rounded-full bg-white/10 p-2.5 hover:bg-white/20"><Youtube className="h-4 w-4" /></a>
+                  <a href={site.social.linkedin} aria-label="LinkedIn" className="rounded-full bg-white/10 p-2.5 hover:bg-white/20"><Linkedin className="h-4 w-4" /></a>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          </aside>
         </div>
       </section>
+
 
       <section className="section-y bg-[color:var(--paper)]">
         <div className="container-narrow grid gap-10 lg:grid-cols-2">
