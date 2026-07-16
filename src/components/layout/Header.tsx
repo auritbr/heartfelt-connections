@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown, Leaf } from "lucide-react";
 import { site } from "@/lib/site-data";
@@ -19,13 +19,22 @@ const nav = [
   { to: "/contato", label: "Contato" },
 ] as const;
 
+// Rotas com hero fotográfico escuro — permitem header transparente no topo.
+const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/noticias", "/galeria", "/contato"];
+const isHeroPath = (p: string) =>
+  HERO_ROUTES.some((r) => (r === "/" ? p === "/" : p === r || p.startsWith(r + "/"))) ||
+  /^\/noticias\/[^/]+$/.test(p);
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const [subOpen, setSubOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const overHero = isHeroPath(pathname);
+  const transparent = overHero && !scrolled && !open;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -33,25 +42,48 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
+
+  const linkBase = transparent
+    ? "text-[color:var(--paper)]/90 hover:text-white"
+    : "text-foreground/80 hover:text-[color:var(--forest)]";
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full border-b transition-colors ${
-        scrolled ? "bg-background/95 backdrop-blur" : "bg-background"
+      className={`fixed top-0 z-40 w-full transition-colors duration-300 ${
+        transparent
+          ? "bg-transparent border-b border-white/10"
+          : "bg-background/95 backdrop-blur border-b shadow-[0_1px_0_rgba(0,0,0,0.03)]"
       }`}
+      data-transparent={transparent ? "true" : "false"}
     >
       <div className="container-narrow flex h-20 items-center justify-between gap-4">
         <Link to="/" className="flex min-w-0 items-center gap-2.5" aria-label={site.name}>
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[color:var(--forest)] text-[color:var(--paper)]">
+          <span
+            className={`grid h-10 w-10 shrink-0 place-items-center rounded-full ${
+              transparent
+                ? "bg-white/15 backdrop-blur text-[color:var(--paper)] ring-1 ring-white/30"
+                : "bg-[color:var(--forest)] text-[color:var(--paper)]"
+            }`}
+          >
             <Leaf className="h-5 w-5" aria-hidden />
           </span>
           <span className="min-w-0 leading-tight">
-            <span className="block truncate font-display text-[15px] font-bold text-[color:var(--forest)]">
+            <span
+              className={`block truncate font-display text-[15px] font-bold ${
+                transparent ? "text-white" : "text-[color:var(--forest)]"
+              }`}
+            >
               {site.name}
             </span>
-            <span className="block truncate text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+            <span
+              className={`block truncate text-[11px] uppercase tracking-[0.14em] ${
+                transparent ? "text-white/80" : "text-muted-foreground"
+              }`}
+            >
               {site.tagline}
             </span>
           </span>
@@ -63,7 +95,7 @@ export function Header() {
               <div key={item.label} className="group relative">
                 <Link
                   to={item.to}
-                  className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-foreground/80 hover:text-[color:var(--forest)] data-[status=active]:text-[color:var(--forest)]"
+                  className={`inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium ${linkBase} data-[status=active]:text-[color:var(--ochre)]`}
                   activeOptions={{ exact: false }}
                 >
                   {item.label}
@@ -88,7 +120,7 @@ export function Header() {
               <Link
                 key={item.to}
                 to={item.to}
-                className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 hover:text-[color:var(--forest)] data-[status=active]:text-[color:var(--forest)]"
+                className={`rounded-md px-3 py-2 text-sm font-medium ${linkBase} data-[status=active]:text-[color:var(--ochre)]`}
                 activeOptions={{ exact: item.to === "/" }}
               >
                 {item.label}
@@ -100,7 +132,11 @@ export function Header() {
         <div className="hidden lg:block">
           <Link
             to="/contato"
-            className="inline-flex items-center rounded-full bg-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--paper)] shadow-sm transition hover:bg-[color:var(--moss)]"
+            className={`inline-flex items-center rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm transition ${
+              transparent
+                ? "bg-white text-[color:var(--forest)] hover:bg-[color:var(--leaf)]"
+                : "bg-[color:var(--forest)] text-[color:var(--paper)] hover:bg-[color:var(--moss)]"
+            }`}
           >
             Participe
           </Link>
@@ -108,7 +144,9 @@ export function Header() {
 
         <button
           type="button"
-          className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-md border"
+          className={`lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-md border ${
+            transparent ? "border-white/40 text-white" : "border-border text-foreground"
+          }`}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
