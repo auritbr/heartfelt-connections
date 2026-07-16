@@ -400,18 +400,69 @@ export const timeline = [
   { year: "2024", title: "Novas parcerias", desc: "Consolidação de rede com escolas, universidades e apoiadores." },
 ];
 
-export const documents = [
-  { name: "Estatuto Social", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "412 KB" },
-  { name: "Regimento Interno", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "228 KB" },
-  { name: "Relatório de Atividades 2025", category: "Relatórios de atividades", year: "2025", type: "PDF", size: "3,2 MB" },
-  { name: "Relatório de Atividades 2024", category: "Relatórios de atividades", year: "2024", type: "PDF", size: "2,8 MB" },
-  { name: "Balanço Financeiro 2025", category: "Relatórios financeiros", year: "2025", type: "PDF", size: "1,1 MB" },
-  { name: "Prestação de Contas 2024", category: "Prestação de contas", year: "2024", type: "PDF", size: "1,5 MB" },
-  { name: "Certificado Ponto de Cultura", category: "Certificados e reconhecimentos", year: "2017", type: "PDF", size: "180 KB" },
-  { name: "Edital Formativo 2026", category: "Editais e parcerias", year: "2026", type: "PDF", size: "320 KB" },
-  { name: "Política Ambiental", category: "Políticas institucionais", year: "2024", type: "PDF", size: "210 KB" },
-  { name: "Ata de Assembleia 2025", category: "Atas e governança", year: "2025", type: "PDF", size: "156 KB" },
-  { name: "Portfólio Institucional", category: "Portfólios e publicações", year: "2025", type: "PDF", size: "5,4 MB" },
+export const transparencyCategories = [
+  "Documentos oficiais e institucionais",
+  "Portfólios e prestação de contas",
+  "Certificados e reconhecimentos",
+  "Relatórios de atividades",
+  "Relatórios financeiros",
+  "Estatuto e regimentos",
+  "Editais, termos e parcerias",
+  "Políticas institucionais",
+  "Atas e governança",
+  "Publicações e materiais técnicos",
+] as const;
+
+export type TransparencyDoc = {
+  name: string;
+  category: (typeof transparencyCategories)[number];
+  year: string;
+  type: string;
+  size: string;
+  url: string;
+  publishedAt?: string;
+  featured?: boolean;
+  cover?: string;
+};
+
+export const documents: TransparencyDoc[] = [
+  { name: "Cadastro Nacional CNPJ", category: "Documentos oficiais e institucionais", year: "2024", type: "PDF", size: "180 KB", url: "#" },
+  { name: "Cadastro Municipal", category: "Documentos oficiais e institucionais", year: "2024", type: "PDF", size: "142 KB", url: "#" },
+  { name: "Alvará de Funcionamento 2025", category: "Documentos oficiais e institucionais", year: "2025", type: "PDF", size: "220 KB", url: "#" },
+  { name: "Portfólio Institucional 2025", category: "Portfólios e prestação de contas", year: "2025", type: "PDF", size: "5,4 MB", url: "#" },
+  { name: "Portfólio Institucional 2024", category: "Portfólios e prestação de contas", year: "2024", type: "PDF", size: "4,9 MB", url: "#" },
+  { name: "Prestação de Contas 2024", category: "Portfólios e prestação de contas", year: "2024", type: "PDF", size: "1,5 MB", url: "#" },
+  { name: "Certificado Ponto de Cultura", category: "Certificados e reconhecimentos", year: "2017", type: "PDF", size: "180 KB", url: "#" },
+  { name: "Selo Educação Ambiental", category: "Certificados e reconhecimentos", year: "2022", type: "PDF", size: "160 KB", url: "#" },
+  { name: "Prêmio Território Vivo 2023", category: "Certificados e reconhecimentos", year: "2023", type: "PDF", size: "210 KB", url: "#" },
+  {
+    name: "Relatório Anual de Atividades 2025",
+    category: "Relatórios de atividades",
+    year: "2025",
+    type: "PDF",
+    size: "4,2 MB",
+    url: "#",
+    publishedAt: "2026-02-20",
+    featured: true,
+    cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80&auto=format&fit=crop",
+  },
+  { name: "Relatório Anual de Atividades 2024", category: "Relatórios de atividades", year: "2024", type: "PDF", size: "3,8 MB", url: "#", publishedAt: "2025-02-14" },
+  { name: "Relatório Anual de Atividades 2023", category: "Relatórios de atividades", year: "2023", type: "PDF", size: "3,1 MB", url: "#", publishedAt: "2024-02-10" },
+  { name: "Balanço Financeiro 2025", category: "Relatórios financeiros", year: "2025", type: "PDF", size: "1,1 MB", url: "#" },
+  { name: "Balanço Financeiro 2024", category: "Relatórios financeiros", year: "2024", type: "PDF", size: "980 KB", url: "#" },
+  { name: "DRE 2024", category: "Relatórios financeiros", year: "2024", type: "PDF", size: "540 KB", url: "#" },
+  { name: "Estatuto Social", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "412 KB", url: "#" },
+  { name: "Regimento Interno", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "228 KB", url: "#" },
+  { name: "Edital Formativo 2026", category: "Editais, termos e parcerias", year: "2026", type: "PDF", size: "320 KB", url: "#" },
+  { name: "Termo de Fomento — Cultura Viva", category: "Editais, termos e parcerias", year: "2024", type: "PDF", size: "410 KB", url: "#" },
+  { name: "Convênio Escolas Parceiras", category: "Editais, termos e parcerias", year: "2023", type: "PDF", size: "280 KB", url: "#" },
+  { name: "Política Ambiental", category: "Políticas institucionais", year: "2024", type: "PDF", size: "210 KB", url: "#" },
+  { name: "Política de Proteção de Crianças e Adolescentes", category: "Políticas institucionais", year: "2024", type: "PDF", size: "260 KB", url: "#" },
+  { name: "Política de Privacidade e Dados", category: "Políticas institucionais", year: "2024", type: "PDF", size: "180 KB", url: "#" },
+  { name: "Ata de Assembleia Ordinária 2025", category: "Atas e governança", year: "2025", type: "PDF", size: "156 KB", url: "#" },
+  { name: "Ata de Assembleia Ordinária 2024", category: "Atas e governança", year: "2024", type: "PDF", size: "148 KB", url: "#" },
+  { name: "Cartilha de Educação Ambiental", category: "Publicações e materiais técnicos", year: "2025", type: "PDF", size: "2,4 MB", url: "#" },
+  { name: "Manual de Boas Práticas Comunitárias", category: "Publicações e materiais técnicos", year: "2024", type: "PDF", size: "1,8 MB", url: "#" },
 ];
 
 export const albums = [
