@@ -57,10 +57,8 @@ function NoticiasPage() {
     setPage(1);
   };
 
-  const featured = filtered[0];
-  const rest = filtered.slice(1);
-  const totalPages = Math.max(1, Math.ceil(rest.length / PAGE));
-  const shown = rest.slice(0, page * PAGE);
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE));
+  const shown = filtered.slice(0, page * PAGE);
 
   const yearsForSelect = ["Todos", ...YEAR_BUCKETS.filter((y) => allYears.includes(y)), "Anteriores"];
 
@@ -87,45 +85,63 @@ function NoticiasPage() {
             </p>
           </div>
 
-          {/* Busca */}
-          <div className="mt-8">
-            <label htmlFor="noticias-busca" className="sr-only">
-              Buscar notícias
-            </label>
-            <div className="relative">
-              <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[color:var(--moss)]" aria-hidden />
+          {/* Busca — compacta */}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="relative w-full max-w-sm">
+              <label htmlFor="noticias-busca" className="sr-only">Buscar notícias</label>
+              <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[color:var(--moss)]" aria-hidden />
               <input
                 id="noticias-busca"
                 value={q}
-                onChange={(e) => {
-                  setQ(e.target.value);
-                  setPage(1);
-                }}
-                placeholder="Buscar por título, assunto ou palavra-chave"
-                className="w-full rounded-full border border-[color:var(--moss)]/30 bg-card pl-12 pr-12 py-4 text-base shadow-sm focus:border-[color:var(--forest)] focus:ring-2 focus:ring-[color:var(--moss)]/30 focus:outline-none"
+                onChange={(e) => { setQ(e.target.value); setPage(1); }}
+                placeholder="Buscar por título ou palavra-chave"
+                className="w-full rounded-full border border-[color:var(--moss)]/30 bg-card pl-9 pr-9 py-2 text-sm shadow-sm focus:border-[color:var(--forest)] focus:ring-2 focus:ring-[color:var(--moss)]/30 focus:outline-none"
               />
               {q && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setQ("");
-                    setPage(1);
-                  }}
+                  onClick={() => { setQ(""); setPage(1); }}
                   aria-label="Limpar busca"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 text-muted-foreground hover:bg-secondary hover:text-[color:var(--forest)]"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground hover:bg-secondary hover:text-[color:var(--forest)]"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-3.5 w-3.5" />
                 </button>
               )}
             </div>
+
+            <label className="flex items-center gap-2 ml-auto">
+              <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                <Filter className="inline h-3.5 w-3.5 mr-1" aria-hidden /> Ano
+              </span>
+              <select
+                value={year}
+                onChange={(e) => { setYear(e.target.value); setPage(1); }}
+                className="rounded-full border border-[color:var(--moss)]/30 bg-card px-3 py-1.5 text-sm font-semibold text-[color:var(--forest)] focus:outline-none focus:ring-2 focus:ring-[color:var(--moss)]/30"
+              >
+                {yearsForSelect.map((y) => (
+                  <option key={y} value={y}>
+                    {y === "Todos" ? "Todos os anos" : y === "Anteriores" ? "Anos anteriores" : y}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {hasFilters && (
+              <button
+                type="button"
+                onClick={clear}
+                className="inline-flex items-center gap-1 rounded-full border border-transparent px-3 py-1.5 text-xs font-semibold text-[color:var(--moss)] hover:bg-[color:var(--leaf)]/40"
+              >
+                <X className="h-3 w-3" /> Limpar
+              </button>
+            )}
           </div>
 
-          {/* Filtros */}
-          <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          {/* Filtros de categoria */}
+          <div className="mt-4">
             <div
               role="tablist"
               aria-label="Filtrar por categoria"
-              className="-mx-1 flex flex-wrap gap-2 overflow-x-auto px-1 lg:flex-wrap"
+              className="-mx-1 flex flex-wrap gap-2 overflow-x-auto px-1"
             >
               {(["Todas", ...newsCategories] as string[]).map((c) => {
                 const active = c === cat;
@@ -135,11 +151,8 @@ function NoticiasPage() {
                     type="button"
                     role="tab"
                     aria-selected={active}
-                    onClick={() => {
-                      setCat(c);
-                      setPage(1);
-                    }}
-                    className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--moss)] ${
+                    onClick={() => { setCat(c); setPage(1); }}
+                    className={`whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--moss)] ${
                       active
                         ? "border-[color:var(--forest)] bg-[color:var(--forest)] text-[color:var(--paper)] shadow-sm"
                         : "border-[color:var(--moss)]/30 bg-card text-[color:var(--forest)] hover:bg-[color:var(--leaf)]/40"
@@ -149,37 +162,6 @@ function NoticiasPage() {
                   </button>
                 );
               })}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <label className="flex items-center gap-2">
-                <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                  <Filter className="inline h-3.5 w-3.5 mr-1" aria-hidden /> Ano
-                </span>
-                <select
-                  value={year}
-                  onChange={(e) => {
-                    setYear(e.target.value);
-                    setPage(1);
-                  }}
-                  className="rounded-full border border-[color:var(--moss)]/30 bg-card px-3 py-2 text-sm font-semibold text-[color:var(--forest)] focus:outline-none focus:ring-2 focus:ring-[color:var(--moss)]/30"
-                >
-                  {yearsForSelect.map((y) => (
-                    <option key={y} value={y}>
-                      {y === "Todos" ? "Todos os anos" : y === "Anteriores" ? "Anos anteriores" : y}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              {hasFilters && (
-                <button
-                  type="button"
-                  onClick={clear}
-                  className="inline-flex items-center gap-1 rounded-full border border-transparent px-3 py-2 text-sm font-semibold text-[color:var(--moss)] hover:bg-[color:var(--leaf)]/40"
-                >
-                  <X className="h-3.5 w-3.5" /> Limpar filtros
-                </button>
-              )}
             </div>
           </div>
 
@@ -202,52 +184,7 @@ function NoticiasPage() {
             </div>
           )}
 
-          {/* Destaque */}
-          {featured && (
-            <article className="mt-12 overflow-hidden rounded-3xl border bg-card shadow-sm">
-              <div className="grid gap-0 md:grid-cols-2">
-                <Link
-                  to="/noticias/$slug"
-                  params={{ slug: featured.slug }}
-                  className="group block aspect-[16/10] md:aspect-auto overflow-hidden"
-                >
-                  <img
-                    src={featured.cover}
-                    alt={featured.title}
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                </Link>
-                <div className="flex flex-col justify-center p-6 md:p-10">
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="rounded-full bg-[color:var(--forest)] px-3 py-1 font-semibold text-[color:var(--paper)]">
-                      Destaque
-                    </span>
-                    <span className="rounded-full bg-[color:var(--leaf)] px-3 py-1 font-semibold text-[color:var(--forest)]">
-                      {featured.category}
-                    </span>
-                    <span className="text-muted-foreground">{formatDate(featured.date)}</span>
-                  </div>
-                  <h3 className="mt-4 font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">
-                    <Link to="/noticias/$slug" params={{ slug: featured.slug }} className="hover:underline">
-                      {featured.title}
-                    </Link>
-                  </h3>
-                  <p className="mt-3 text-muted-foreground">{featured.excerpt}</p>
-                  <div className="mt-6">
-                    <Link
-                      to="/noticias/$slug"
-                      params={{ slug: featured.slug }}
-                      className="inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]"
-                    >
-                      Leia a notícia <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </article>
-          )}
-
-          {/* Grade */}
+          {/* Grade — todas as notícias no mesmo padrão */}
           {shown.length > 0 && (
             <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {shown.map((n) => (
