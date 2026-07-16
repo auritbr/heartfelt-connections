@@ -67,7 +67,7 @@ function AlbumPage() {
         <div className="container-narrow">
           <p className="text-sm text-muted-foreground">{album.date} · {album.place} · {album.photos.length} fotos</p>
           <div className="mt-6 grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {album.photos.map((src, i) => (
+            {album.photos.map((src: string, i: number) => (
               <button key={i} type="button" onClick={() => setIdx(i)} className="group aspect-square overflow-hidden rounded-xl border" aria-label={`Abrir foto ${i + 1}`}>
                 <img src={src} alt={`${album.title} — foto ${i + 1}`} className="h-full w-full object-cover transition group-hover:scale-105" loading="lazy" />
               </button>
