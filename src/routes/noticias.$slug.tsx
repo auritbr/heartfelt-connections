@@ -59,7 +59,7 @@ function NoticiaPage() {
   const idx = news.findIndex((n) => n.slug === item.slug);
   const prev = news[idx - 1];
   const next = news[idx + 1];
-  const related = news.filter((n) => n.slug !== item.slug && n.category === item.category).slice(0, 3);
+  
   const readingTime = estimateReadingTime(item.body);
   const [lb, setLb] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
