@@ -156,3 +156,40 @@
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Organic photo shapes */
+@utility organic-blob {
+  border-radius: 62% 38% 55% 45% / 48% 60% 40% 52%;
+}
+@utility organic-blob-2 {
+  border-radius: 42% 58% 38% 62% / 60% 42% 58% 40%;
+}
+@utility organic-blob-3 {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+/* Paper / fiber texture */
+@utility paper-texture {
+  background-image:
+    radial-gradient(rgba(60,80,50,0.05) 1px, transparent 1px),
+    radial-gradient(rgba(120,90,50,0.04) 1px, transparent 1px);
+  background-size: 22px 22px, 34px 34px;
+  background-position: 0 0, 11px 11px;
+}
+
+/* Topographic rings backdrop */
+@utility topo-rings {
+  background-image: repeating-radial-gradient(
+    circle at 20% 30%,
+    color-mix(in oklab, var(--paper) 8%, transparent) 0 1px,
+    transparent 1px 22px
+  );
+}
+
+/* Scroll reveal (JS toggles .in) */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
