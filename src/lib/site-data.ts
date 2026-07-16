@@ -97,6 +97,23 @@ export const projects = [
   },
 ] as const;
 
+export const newsCategories = [
+  "Ação cultural",
+  "Meio ambiente",
+  "Educação ambiental",
+  "Biblioteca e leitura",
+  "Projetos",
+  "Comunidade",
+  "Sustentabilidade",
+  "Oficinas",
+  "Eventos",
+  "Institucional",
+] as const;
+
+export type NewsCategory = (typeof newsCategories)[number];
+
+export type NewsPhoto = { src: string; caption?: string; credit?: string };
+
 export type NewsItem = {
   slug: string;
   title: string;
@@ -105,9 +122,12 @@ export type NewsItem = {
   date: string; // ISO
   author: string;
   cover: string;
+  coverCaption?: string;
+  coverCredit?: string;
   excerpt: string;
   body: string[];
   tags: string[];
+  gallery?: NewsPhoto[];
 };
 
 export const news: NewsItem[] = [
