@@ -59,7 +59,7 @@ function NoticiaPage() {
   const idx = news.findIndex((n) => n.slug === item.slug);
   const prev = news[idx - 1];
   const next = news[idx + 1];
-  const related = news.filter((n) => n.slug !== item.slug && n.category === item.category).slice(0, 3);
+  
   const readingTime = estimateReadingTime(item.body);
   const [lb, setLb] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
@@ -114,7 +114,7 @@ function NoticiaPage() {
           <ellipse cx="100" cy="100" rx="90" ry="70" fill="currentColor" />
         </svg>
 
-        <div className="container-narrow relative pt-36 md:pt-40 pb-24 md:pb-32 text-[color:var(--paper)]">
+        <div className="container-narrow relative pt-28 md:pt-32 pb-14 md:pb-16 text-[color:var(--paper)]">
           <nav aria-label="Breadcrumb" className="text-xs text-[color:var(--paper)]/85">
             <ol className="flex flex-wrap items-center gap-1">
               <li>
@@ -267,7 +267,7 @@ function NoticiaPage() {
           <div className="container-narrow">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Galeria</p>
             <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">
-              Registros desta ação
+              Galeria de fotos
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
               Confira alguns momentos registrados durante a realização desta atividade.
@@ -302,37 +302,64 @@ function NoticiaPage() {
         </section>
       )}
 
-      {/* Notícias relacionadas */}
-      {related.length > 0 && (
-        <section className="section-y">
-          <div className="container-narrow">
-            <h2 className="font-display text-2xl font-bold text-[color:var(--forest)]">Notícias relacionadas</h2>
-            <div className="mt-6 grid gap-6 md:grid-cols-3">
-              {related.map((n) => (
-                <Link
-                  key={n.slug}
-                  to="/noticias/$slug"
-                  params={{ slug: n.slug }}
-                  className="group overflow-hidden rounded-2xl border bg-card shadow-sm hover:shadow-md transition"
-                >
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={n.cover}
-                      alt={n.title}
-                      className="h-full w-full object-cover transition group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <p className="text-xs text-muted-foreground">{formatDate(n.date)}</p>
-                    <p className="mt-2 font-semibold text-[color:var(--forest)] line-clamp-2">{n.title}</p>
-                  </div>
+      {/* Últimas notícias */}
+      {(() => {
+        const latest = news
+          .filter((n) => n.slug !== item.slug)
+          .slice()
+          .sort((a, b) => b.date.localeCompare(a.date))
+          .slice(0, 3);
+        if (latest.length === 0) return null;
+        return (
+          <section className="section-y">
+            <div className="container-narrow">
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Fique por dentro</p>
+                  <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">Últimas notícias</h2>
+                </div>
+                <Link to="/noticias" className="text-sm font-semibold text-[color:var(--forest)] hover:underline">
+                  Ver todas
                 </Link>
-              ))}
+              </div>
+              <div className="mt-6 grid gap-6 md:grid-cols-3">
+                {latest.map((n) => (
+                  <article
+                    key={n.slug}
+                    className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    <Link to="/noticias/$slug" params={{ slug: n.slug }}>
+                      <div className="aspect-[16/10] overflow-hidden">
+                        <img
+                          src={n.cover}
+                          alt={n.title}
+                          className="h-full w-full object-cover transition group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <span className="rounded-full bg-[color:var(--leaf)] text-[color:var(--forest)] px-2 py-0.5 font-semibold">
+                            {n.category}
+                          </span>
+                          <span>{formatDate(n.date)}</span>
+                        </div>
+                        <h3 className="mt-3 font-display text-lg font-semibold text-[color:var(--forest)] line-clamp-2">
+                          {n.title}
+                        </h3>
+                        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--moss)]">
+                          Leia mais <ArrowRight className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
+                    </Link>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
+
 
       {/* Navegação inferior */}
       <section className="section-y bg-[color:var(--paper)]">
