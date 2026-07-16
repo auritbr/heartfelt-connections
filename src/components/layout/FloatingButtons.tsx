@@ -71,5 +71,5 @@ export function FloatingButtons() {
   );
 }
 
-export { CookiePreferences };
+export type { CookiePreferences };
 export { X };
