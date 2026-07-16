@@ -55,7 +55,7 @@ function estimateReadingTime(paragraphs: string[]) {
 }
 
 function NoticiaPage() {
-  const item = Route.useLoaderData();
+  const item = Route.useLoaderData() as NewsItem;
   const idx = news.findIndex((n) => n.slug === item.slug);
   const prev = news[idx - 1];
   const next = news[idx + 1];
