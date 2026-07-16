@@ -4,7 +4,8 @@ import { PageHero } from "@/components/layout/PageHero";
 import { LeafDivider, RiverLine, TopoRings, BranchLine } from "@/components/OrganicShapes";
 import { useReveal } from "@/hooks/use-reveal";
 import { albums } from "@/lib/site-data";
-import { Calendar, MapPin, Images, ArrowRight, ArrowLeft, X, ChevronDown } from "lucide-react";
+import { Lightbox } from "@/components/ui/Lightbox";
+import { Calendar, MapPin, Images, X, ChevronDown } from "lucide-react";
 
 export const Route = createFileRoute("/galeria/")({
   head: () => ({
@@ -20,30 +21,36 @@ export const Route = createFileRoute("/galeria/")({
   component: GaleriaPage,
 });
 
-type Album = (typeof albums)[number];
+const YEAR_BUCKETS = ["2026", "2025", "2024", "2023", "2022"] as const;
 
 function GaleriaPage() {
   useReveal();
 
-  const years = useMemo(
-    () => Array.from(new Set(albums.map((a) => a.year))).sort((a, b) => b.localeCompare(a)),
-    [],
-  );
-  const [year, setYear] = useState(years[0]);
+  const availableYears = useMemo(() => Array.from(new Set(albums.map((a) => a.year))), []);
+  const yearsList = useMemo(() => {
+    const list: string[] = [];
+    YEAR_BUCKETS.forEach((y) => {
+      if (availableYears.includes(y)) list.push(y);
+    });
+    const olderExists = availableYears.some((y) => Number(y) < 2022);
+    if (olderExists) list.push("Anteriores");
+    return list;
+  }, [availableYears]);
+
+  const [year, setYear] = useState<string>(yearsList[0] ?? "2026");
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
   const albumRef = useRef<HTMLDivElement | null>(null);
-  const scrollYRef = useRef(0);
 
-  const yearAlbums = albums.filter((a) => a.year === year);
-  const openAlbum: Album | undefined = yearAlbums.find((a) => a.slug === openSlug);
+  const yearAlbums = albums.filter((a) =>
+    year === "Anteriores" ? Number(a.year) < 2022 : a.year === year,
+  );
+  const openAlbum = yearAlbums.find((a) => a.slug === openSlug);
 
-  // Switching years closes any open album
   useEffect(() => {
     setOpenSlug(null);
   }, [year]);
 
-  // Scroll to open album
   useEffect(() => {
     if (openSlug && albumRef.current) {
       requestAnimationFrame(() =>
@@ -52,23 +59,13 @@ function GaleriaPage() {
     }
   }, [openSlug]);
 
-  // Lightbox keyboard nav + scroll lock
-  useEffect(() => {
-    if (lightbox === null || !openAlbum) return;
-    scrollYRef.current = window.scrollY;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightbox(null);
-      if (e.key === "ArrowRight") setLightbox((i) => (i === null ? null : (i + 1) % openAlbum.photos.length));
-      if (e.key === "ArrowLeft") setLightbox((i) => (i === null ? null : (i - 1 + openAlbum.photos.length) % openAlbum.photos.length));
-    };
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-      window.scrollTo({ top: scrollYRef.current });
-    };
-  }, [lightbox, openAlbum]);
+  const lightboxPhotos = useMemo(
+    () =>
+      openAlbum
+        ? openAlbum.photos.map((src, i) => ({ src, alt: `${openAlbum.title} — foto ${i + 1}` }))
+        : [],
+    [openAlbum],
+  );
 
   return (
     <>
@@ -80,20 +77,22 @@ function GaleriaPage() {
         crumbs={[{ to: "/", label: "Início" }, { label: "Galeria" }]}
       />
 
-      {/* Year selector */}
+      {/* Year selector — compacto */}
       <section className="relative bg-[color:var(--forest)] text-[color:var(--paper)]">
         <TopoRings className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] text-[color:var(--leaf)]/20" />
-        <div className="container-narrow relative py-10">
+        <div className="container-narrow relative py-8">
           <div className="flex items-center gap-3">
-            <RiverLine className="h-4 w-24 text-[color:var(--ochre)]" />
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--leaf)]">Selecione o ano</p>
+            <RiverLine className="h-3 w-16 text-[color:var(--ochre)]" />
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--leaf)]">
+              Selecione o ano
+            </p>
           </div>
           <div
             role="tablist"
             aria-label="Selecionar ano da galeria"
-            className="mt-5 flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 snap-x"
+            className="mt-4 flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 snap-x"
           >
-            {years.map((y) => {
+            {yearsList.map((y) => {
               const active = y === year;
               return (
                 <button
@@ -105,15 +104,18 @@ function GaleriaPage() {
                   onKeyDown={(e) => {
                     if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
                       e.preventDefault();
-                      const idx = years.indexOf(y);
-                      const next = e.key === "ArrowRight" ? (idx + 1) % years.length : (idx - 1 + years.length) % years.length;
-                      setYear(years[next]);
+                      const idx = yearsList.indexOf(y);
+                      const next =
+                        e.key === "ArrowRight"
+                          ? (idx + 1) % yearsList.length
+                          : (idx - 1 + yearsList.length) % yearsList.length;
+                      setYear(yearsList[next]);
                     }
                   }}
-                  className={`snap-start shrink-0 rounded-full px-6 py-3 font-display text-lg font-bold transition ${
+                  className={`snap-start shrink-0 rounded-full px-4 h-10 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--ochre)] ${
                     active
-                      ? "bg-[color:var(--ochre)] text-[color:var(--forest)] shadow-lg scale-105"
-                      : "border border-[color:var(--paper)]/25 text-[color:var(--paper)]/80 hover:bg-[color:var(--paper)]/10"
+                      ? "bg-[color:var(--forest)] text-white ring-2 ring-[color:var(--ochre)] shadow-sm"
+                      : "border border-[color:var(--leaf)]/40 bg-[color:var(--paper)] text-[color:var(--forest)] hover:bg-[color:var(--leaf)]/40"
                   }`}
                 >
                   {y}
@@ -130,7 +132,7 @@ function GaleriaPage() {
         <div className="container-narrow">
           <div className="flex items-baseline justify-between reveal">
             <h2 className="font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
-              Registros de {year}
+              Registros de {year === "Anteriores" ? "anos anteriores" : year}
             </h2>
             <span className="text-sm text-muted-foreground">
               {yearAlbums.length} {yearAlbums.length === 1 ? "álbum" : "álbuns"}
@@ -144,7 +146,12 @@ function GaleriaPage() {
               {yearAlbums.map((a, i) => {
                 const active = a.slug === openSlug;
                 return (
-                  <article key={a.slug} className={`reveal group overflow-hidden rounded-3xl border bg-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg ${active ? "ring-2 ring-[color:var(--moss)]" : ""}`}>
+                  <article
+                    key={a.slug}
+                    className={`reveal group overflow-hidden rounded-3xl border bg-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg ${
+                      active ? "ring-2 ring-[color:var(--moss)]" : ""
+                    }`}
+                  >
                     <button
                       type="button"
                       aria-expanded={active}
@@ -153,19 +160,31 @@ function GaleriaPage() {
                       className="text-left w-full"
                     >
                       <div className={`aspect-[4/3] overflow-hidden ${i % 3 === 0 ? "organic-blob-3" : ""}`}>
-                        <img src={a.cover} alt={a.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
+                        <img
+                          src={a.cover}
+                          alt={a.title}
+                          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                          loading="lazy"
+                        />
                       </div>
                       <div className="p-5">
                         <p className="text-[11px] text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
-                          <span className="inline-flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> {a.date}</span>
-                          <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {a.place}</span>
+                          <span className="inline-flex items-center gap-1">
+                            <Calendar className="h-3.5 w-3.5" /> {a.date}
+                          </span>
+                          <span className="inline-flex items-center gap-1">
+                            <MapPin className="h-3.5 w-3.5" /> {a.place}
+                          </span>
                         </p>
                         <h3 className="mt-2 font-display text-xl font-bold text-[color:var(--forest)]">{a.title}</h3>
                         <p className="mt-1 text-xs uppercase tracking-widest text-[color:var(--moss)]">{a.project}</p>
                         <div className="mt-4 flex items-center justify-between text-sm">
-                          <span className="inline-flex items-center gap-1 text-muted-foreground"><Images className="h-3.5 w-3.5" /> {a.photos.length} fotos</span>
-                          <span className={`inline-flex items-center gap-1 font-semibold text-[color:var(--forest)] transition ${active ? "rotate-180" : ""}`}>
-                            {active ? "Fechar" : "Ver fotos"} <ChevronDown className="h-4 w-4" />
+                          <span className="inline-flex items-center gap-1 text-muted-foreground">
+                            <Images className="h-3.5 w-3.5" /> {a.photos.length} fotos
+                          </span>
+                          <span className="inline-flex items-center gap-1 font-semibold text-[color:var(--forest)]">
+                            {active ? "Fechar" : "Ver fotos"}
+                            <ChevronDown className={`h-4 w-4 transition ${active ? "rotate-180" : ""}`} />
                           </span>
                         </div>
                       </div>
@@ -176,7 +195,6 @@ function GaleriaPage() {
             </div>
           )}
 
-          {/* Expandable album panel — same page */}
           {openAlbum && (
             <div
               id="album-panel"
@@ -189,13 +207,21 @@ function GaleriaPage() {
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Álbum</p>
-                  <h3 className="mt-1 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">{openAlbum.title}</h3>
+                  <h3 className="mt-1 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
+                    {openAlbum.title}
+                  </h3>
                   <RiverLine className="mt-3 h-4 w-32 text-[color:var(--ochre)]" />
                   <p className="mt-3 max-w-2xl text-sm md:text-base text-muted-foreground">{openAlbum.description}</p>
                   <p className="mt-3 text-xs text-muted-foreground flex flex-wrap gap-x-4 gap-y-1">
-                    <span className="inline-flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> {openAlbum.date}</span>
-                    <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {openAlbum.place}</span>
-                    <span className="inline-flex items-center gap-1"><Images className="h-3.5 w-3.5" /> {openAlbum.photos.length} fotos</span>
+                    <span className="inline-flex items-center gap-1">
+                      <Calendar className="h-3.5 w-3.5" /> {openAlbum.date}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <MapPin className="h-3.5 w-3.5" /> {openAlbum.place}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Images className="h-3.5 w-3.5" /> {openAlbum.photos.length} fotos
+                    </span>
                   </p>
                 </div>
                 <button
@@ -208,7 +234,7 @@ function GaleriaPage() {
               </div>
 
               <div className="mt-8 grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {openAlbum.photos.map((src: string, i: number) => (
+                {openAlbum.photos.map((src, i) => (
                   <button
                     key={i}
                     type="button"
@@ -230,34 +256,14 @@ function GaleriaPage() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightbox !== null && openAlbum && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Foto ${lightbox + 1} de ${openAlbum.photos.length} — ${openAlbum.title}`}
-          className="fixed inset-0 z-50 grid place-items-center bg-black/92 p-4"
-        >
-          <button type="button" aria-label="Fechar" onClick={() => setLightbox(null)} className="absolute top-4 right-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20">
-            <X className="h-5 w-5" />
-          </button>
-          <button type="button" aria-label="Foto anterior" onClick={() => setLightbox((i) => (i === null ? null : (i - 1 + openAlbum.photos.length) % openAlbum.photos.length))} className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20">
-            <ArrowLeft className="h-5 w-5" />
-          </button>
-          <button type="button" aria-label="Próxima foto" onClick={() => setLightbox((i) => (i === null ? null : (i + 1) % openAlbum.photos.length))} className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white hover:bg-white/20">
-            <ArrowRight className="h-5 w-5" />
-          </button>
-          <div className="max-w-6xl w-full">
-            <img
-              src={openAlbum.photos[lightbox]}
-              alt={`${openAlbum.title} — foto ${lightbox + 1}`}
-              className="mx-auto max-h-[82vh] w-auto rounded-lg shadow-2xl"
-            />
-            <p className="mt-4 text-center text-sm text-white/85">
-              {openAlbum.title} · {lightbox + 1} de {openAlbum.photos.length}
-            </p>
-          </div>
-        </div>
+      {openAlbum && (
+        <Lightbox
+          photos={lightboxPhotos}
+          index={lightbox}
+          title={openAlbum.title}
+          onClose={() => setLightbox(null)}
+          onIndexChange={setLightbox}
+        />
       )}
     </>
   );

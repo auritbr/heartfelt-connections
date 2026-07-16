@@ -97,6 +97,23 @@ export const projects = [
   },
 ] as const;
 
+export const newsCategories = [
+  "Ação cultural",
+  "Meio ambiente",
+  "Educação ambiental",
+  "Biblioteca e leitura",
+  "Projetos",
+  "Comunidade",
+  "Sustentabilidade",
+  "Oficinas",
+  "Eventos",
+  "Institucional",
+] as const;
+
+export type NewsCategory = (typeof newsCategories)[number];
+
+export type NewsPhoto = { src: string; caption?: string; credit?: string };
+
 export type NewsItem = {
   slug: string;
   title: string;
@@ -105,9 +122,12 @@ export type NewsItem = {
   date: string; // ISO
   author: string;
   cover: string;
+  coverCaption?: string;
+  coverCredit?: string;
   excerpt: string;
   body: string[];
   tags: string[];
+  gallery?: NewsPhoto[];
 };
 
 export const news: NewsItem[] = [
@@ -115,11 +135,13 @@ export const news: NewsItem[] = [
     slug: "semana-do-meio-ambiente-2026",
     title: "Semana do Meio Ambiente reúne comunidades em torno do território",
     subtitle: "Uma semana de oficinas, plantios e rodas de conversa em cinco comunidades",
-    category: "Educação ambiental",
+    category: "Meio ambiente",
     date: "2026-06-05",
     author: "Equipe de Comunicação",
     cover:
       "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Encerramento da Semana do Meio Ambiente reuniu comunidades e famílias parceiras.",
+    coverCredit: "Foto: Arquivo Instituto",
     excerpt:
       "Programação envolveu mais de 800 pessoas em atividades ao ar livre, plantios e mediações de leitura.",
     body: [
@@ -128,16 +150,27 @@ export const news: NewsItem[] = [
       "As ações reforçam o compromisso com a educação ambiental como prática cotidiana, construída em diálogo com moradores, escolas e agentes locais.",
     ],
     tags: ["meio ambiente", "comunidade", "educação"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1400&q=80&auto=format&fit=crop", caption: "Roda de conversa na abertura", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&q=80&auto=format&fit=crop", caption: "Trilha guiada no território", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80&auto=format&fit=crop", caption: "Plantio comunitário", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop", caption: "Mata do território", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=80&auto=format&fit=crop", caption: "Mediação de leitura ao ar livre", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1400&q=80&auto=format&fit=crop", caption: "Jovens guardiões", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop", caption: "Oficina com estudantes", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80&auto=format&fit=crop", caption: "Encontro de saberes", credit: "Arquivo Instituto" },
+    ],
   },
   {
     slug: "biblioteca-verde-amplia-acervo",
     title: "Biblioteca Verde amplia acervo com publicações sobre biodiversidade",
     subtitle: "Nova coleção reúne pesquisas, cartilhas e literatura infantojuvenil",
-    category: "Biblioteca",
+    category: "Biblioteca e leitura",
     date: "2026-05-18",
     author: "Coordenação de Acervo",
     cover:
       "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Novos títulos passam a compor o acervo da Biblioteca Verde.",
     excerpt:
       "Mais de 300 novos títulos passam a compor o acervo ambiental e cultural aberto à comunidade.",
     body: [
@@ -145,6 +178,12 @@ export const news: NewsItem[] = [
       "O acervo está disponível para consulta e empréstimo, com mediações semanais realizadas por educadores e voluntários.",
     ],
     tags: ["biblioteca", "leitura", "acervo"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=80&auto=format&fit=crop", caption: "Acervo da Biblioteca Verde" },
+      { src: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1400&q=80&auto=format&fit=crop", caption: "Mediação de leitura" },
+      { src: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=80&auto=format&fit=crop", caption: "Espaço de leitura" },
+      { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop", caption: "Encontro de leitores" },
+    ],
   },
   {
     slug: "mutirao-de-plantio",
@@ -155,6 +194,7 @@ export const news: NewsItem[] = [
     author: "Coordenação de Projetos",
     cover:
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Voluntários no plantio de mudas nativas.",
     excerpt:
       "Foram plantadas 500 mudas nativas em torno de uma nascente comunitária recuperada por voluntários.",
     body: [
@@ -162,38 +202,56 @@ export const news: NewsItem[] = [
       "A ação integra o projeto Guardiões do Território e conta com monitoramento ambiental permanente.",
     ],
     tags: ["plantio", "nascente", "mutirão"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80&auto=format&fit=crop", caption: "Plantio de mudas" },
+      { src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&q=80&auto=format&fit=crop", caption: "Preparação do solo" },
+      { src: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1400&q=80&auto=format&fit=crop", caption: "Voluntários no campo" },
+      { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop", caption: "Nascente recuperada" },
+    ],
   },
   {
     slug: "encontro-de-saberes",
     title: "Encontro de Saberes valoriza mestres e mestras da comunidade",
     subtitle: "Roda de conversa reuniu gerações em torno de ofícios e memórias",
-    category: "Cultura",
+    category: "Ação cultural",
     date: "2026-03-30",
     author: "Coordenação Cultural",
     cover:
       "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Mestras e mestres em roda de conversa aberta ao público.",
     excerpt:
       "Mestras e mestres compartilharam ofícios, cantos e histórias em um encontro aberto ao público.",
     body: [
       "O Encontro de Saberes reuniu mestras e mestres da comunidade em uma roda de conversa aberta ao público, com apresentações culturais e trocas intergeracionais.",
     ],
     tags: ["cultura", "memória", "comunidade"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80&auto=format&fit=crop", caption: "Roda de saberes" },
+      { src: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1400&q=80&auto=format&fit=crop", caption: "Participação comunitária" },
+      { src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1400&q=80&auto=format&fit=crop", caption: "Apresentação cultural" },
+    ],
   },
   {
     slug: "novo-ciclo-formativo",
     title: "Novo ciclo formativo para jovens educadores começa em agosto",
     subtitle: "Inscrições abertas para 40 vagas com bolsa-auxílio",
-    category: "Projetos",
+    category: "Educação ambiental",
     date: "2026-07-01",
     author: "Coordenação Pedagógica",
     cover:
       "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Jovens em formação de educadores ambientais.",
     excerpt:
       "Programa forma jovens educadores ambientais em parceria com escolas e universidades da região.",
     body: [
       "O programa de formação de jovens educadores ambientais abre inscrições para 40 vagas, com bolsa-auxílio e certificação.",
     ],
     tags: ["formação", "juventude", "educação"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop" },
+      { src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1400&q=80&auto=format&fit=crop" },
+      { src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1400&q=80&auto=format&fit=crop" },
+    ],
   },
   {
     slug: "parceria-institucional",
@@ -210,6 +268,51 @@ export const news: NewsItem[] = [
       "A parceria firmada neste mês amplia a atuação do Instituto em quatro novas comunidades rurais, com foco em educação ambiental e cultura.",
     ],
     tags: ["parceria", "institucional"],
+  },
+  {
+    slug: "oficina-arte-natureza",
+    title: "Oficina de arte e natureza une expressão e biodiversidade",
+    subtitle: "Estudantes exploraram materiais naturais em processos criativos",
+    category: "Oficinas",
+    date: "2025-11-10",
+    author: "Coordenação Cultural",
+    cover:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1600&q=80&auto=format&fit=crop",
+    excerpt: "Estudantes produziram obras utilizando folhas, sementes e pigmentos naturais.",
+    body: [
+      "A oficina reuniu 60 estudantes em quatro dias de imersão, explorando técnicas de arte com materiais naturais coletados no território.",
+    ],
+    tags: ["oficina", "arte", "educação"],
+  },
+  {
+    slug: "festival-cultural-territorio",
+    title: "Festival Cultural do Território celebra 15 anos de atuação",
+    subtitle: "Programação teve música, feira agroecológica e apresentações",
+    category: "Eventos",
+    date: "2025-08-22",
+    author: "Equipe de Comunicação",
+    cover:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1600&q=80&auto=format&fit=crop",
+    excerpt: "Mais de 2 mil pessoas participaram do festival aberto e gratuito.",
+    body: [
+      "O Festival Cultural do Território marcou os 15 anos do Instituto com apresentações musicais, feira agroecológica e mostra de projetos comunitários.",
+    ],
+    tags: ["festival", "aniversário", "cultura"],
+  },
+  {
+    slug: "assembleia-comunitaria",
+    title: "Assembleia comunitária define prioridades para o próximo ciclo",
+    subtitle: "Moradores participaram da construção coletiva do plano de ação",
+    category: "Comunidade",
+    date: "2024-10-05",
+    author: "Mobilização Comunitária",
+    cover:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1600&q=80&auto=format&fit=crop",
+    excerpt: "Encontro reuniu representantes das comunidades atendidas para debater os próximos passos.",
+    body: [
+      "A assembleia contou com a participação de mais de 120 pessoas e resultou em diretrizes para os próximos dois anos de atuação.",
+    ],
+    tags: ["assembleia", "participação", "planejamento"],
   },
 ];
 
@@ -297,18 +400,69 @@ export const timeline = [
   { year: "2024", title: "Novas parcerias", desc: "Consolidação de rede com escolas, universidades e apoiadores." },
 ];
 
-export const documents = [
-  { name: "Estatuto Social", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "412 KB" },
-  { name: "Regimento Interno", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "228 KB" },
-  { name: "Relatório de Atividades 2025", category: "Relatórios de atividades", year: "2025", type: "PDF", size: "3,2 MB" },
-  { name: "Relatório de Atividades 2024", category: "Relatórios de atividades", year: "2024", type: "PDF", size: "2,8 MB" },
-  { name: "Balanço Financeiro 2025", category: "Relatórios financeiros", year: "2025", type: "PDF", size: "1,1 MB" },
-  { name: "Prestação de Contas 2024", category: "Prestação de contas", year: "2024", type: "PDF", size: "1,5 MB" },
-  { name: "Certificado Ponto de Cultura", category: "Certificados e reconhecimentos", year: "2017", type: "PDF", size: "180 KB" },
-  { name: "Edital Formativo 2026", category: "Editais e parcerias", year: "2026", type: "PDF", size: "320 KB" },
-  { name: "Política Ambiental", category: "Políticas institucionais", year: "2024", type: "PDF", size: "210 KB" },
-  { name: "Ata de Assembleia 2025", category: "Atas e governança", year: "2025", type: "PDF", size: "156 KB" },
-  { name: "Portfólio Institucional", category: "Portfólios e publicações", year: "2025", type: "PDF", size: "5,4 MB" },
+export const transparencyCategories = [
+  "Documentos oficiais e institucionais",
+  "Portfólios e prestação de contas",
+  "Certificados e reconhecimentos",
+  "Relatórios de atividades",
+  "Relatórios financeiros",
+  "Estatuto e regimentos",
+  "Editais, termos e parcerias",
+  "Políticas institucionais",
+  "Atas e governança",
+  "Publicações e materiais técnicos",
+] as const;
+
+export type TransparencyDoc = {
+  name: string;
+  category: (typeof transparencyCategories)[number];
+  year: string;
+  type: string;
+  size: string;
+  url: string;
+  publishedAt?: string;
+  featured?: boolean;
+  cover?: string;
+};
+
+export const documents: TransparencyDoc[] = [
+  { name: "Cadastro Nacional CNPJ", category: "Documentos oficiais e institucionais", year: "2024", type: "PDF", size: "180 KB", url: "#" },
+  { name: "Cadastro Municipal", category: "Documentos oficiais e institucionais", year: "2024", type: "PDF", size: "142 KB", url: "#" },
+  { name: "Alvará de Funcionamento 2025", category: "Documentos oficiais e institucionais", year: "2025", type: "PDF", size: "220 KB", url: "#" },
+  { name: "Portfólio Institucional 2025", category: "Portfólios e prestação de contas", year: "2025", type: "PDF", size: "5,4 MB", url: "#" },
+  { name: "Portfólio Institucional 2024", category: "Portfólios e prestação de contas", year: "2024", type: "PDF", size: "4,9 MB", url: "#" },
+  { name: "Prestação de Contas 2024", category: "Portfólios e prestação de contas", year: "2024", type: "PDF", size: "1,5 MB", url: "#" },
+  { name: "Certificado Ponto de Cultura", category: "Certificados e reconhecimentos", year: "2017", type: "PDF", size: "180 KB", url: "#" },
+  { name: "Selo Educação Ambiental", category: "Certificados e reconhecimentos", year: "2022", type: "PDF", size: "160 KB", url: "#" },
+  { name: "Prêmio Território Vivo 2023", category: "Certificados e reconhecimentos", year: "2023", type: "PDF", size: "210 KB", url: "#" },
+  {
+    name: "Relatório Anual de Atividades 2025",
+    category: "Relatórios de atividades",
+    year: "2025",
+    type: "PDF",
+    size: "4,2 MB",
+    url: "#",
+    publishedAt: "2026-02-20",
+    featured: true,
+    cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80&auto=format&fit=crop",
+  },
+  { name: "Relatório Anual de Atividades 2024", category: "Relatórios de atividades", year: "2024", type: "PDF", size: "3,8 MB", url: "#", publishedAt: "2025-02-14" },
+  { name: "Relatório Anual de Atividades 2023", category: "Relatórios de atividades", year: "2023", type: "PDF", size: "3,1 MB", url: "#", publishedAt: "2024-02-10" },
+  { name: "Balanço Financeiro 2025", category: "Relatórios financeiros", year: "2025", type: "PDF", size: "1,1 MB", url: "#" },
+  { name: "Balanço Financeiro 2024", category: "Relatórios financeiros", year: "2024", type: "PDF", size: "980 KB", url: "#" },
+  { name: "DRE 2024", category: "Relatórios financeiros", year: "2024", type: "PDF", size: "540 KB", url: "#" },
+  { name: "Estatuto Social", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "412 KB", url: "#" },
+  { name: "Regimento Interno", category: "Estatuto e regimentos", year: "2023", type: "PDF", size: "228 KB", url: "#" },
+  { name: "Edital Formativo 2026", category: "Editais, termos e parcerias", year: "2026", type: "PDF", size: "320 KB", url: "#" },
+  { name: "Termo de Fomento — Cultura Viva", category: "Editais, termos e parcerias", year: "2024", type: "PDF", size: "410 KB", url: "#" },
+  { name: "Convênio Escolas Parceiras", category: "Editais, termos e parcerias", year: "2023", type: "PDF", size: "280 KB", url: "#" },
+  { name: "Política Ambiental", category: "Políticas institucionais", year: "2024", type: "PDF", size: "210 KB", url: "#" },
+  { name: "Política de Proteção de Crianças e Adolescentes", category: "Políticas institucionais", year: "2024", type: "PDF", size: "260 KB", url: "#" },
+  { name: "Política de Privacidade e Dados", category: "Políticas institucionais", year: "2024", type: "PDF", size: "180 KB", url: "#" },
+  { name: "Ata de Assembleia Ordinária 2025", category: "Atas e governança", year: "2025", type: "PDF", size: "156 KB", url: "#" },
+  { name: "Ata de Assembleia Ordinária 2024", category: "Atas e governança", year: "2024", type: "PDF", size: "148 KB", url: "#" },
+  { name: "Cartilha de Educação Ambiental", category: "Publicações e materiais técnicos", year: "2025", type: "PDF", size: "2,4 MB", url: "#" },
+  { name: "Manual de Boas Práticas Comunitárias", category: "Publicações e materiais técnicos", year: "2024", type: "PDF", size: "1,8 MB", url: "#" },
 ];
 
 export const albums = [
