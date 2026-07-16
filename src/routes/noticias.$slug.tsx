@@ -55,13 +55,13 @@ function NoticiaPage() {
           <p className="text-sm text-muted-foreground">{formatDate(item.date)} · Por {item.author}</p>
           <img src={item.cover} alt={item.title} className="mt-6 w-full rounded-2xl object-cover aspect-[16/9]" />
           <div className="prose prose-neutral mt-8 max-w-none">
-            {item.body.map((p, i) => (
+            {item.body.map((p: string, i: number) => (
               <p key={i} className="mt-4 text-base leading-relaxed text-foreground/90">{p}</p>
             ))}
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tags:</span>
-            {item.tags.map((t) => <span key={t} className="rounded-full bg-[color:var(--leaf)] text-[color:var(--forest)] px-3 py-1 text-xs font-semibold">#{t}</span>)}
+            {item.tags.map((t: string) => <span key={t} className="rounded-full bg-[color:var(--leaf)] text-[color:var(--forest)] px-3 py-1 text-xs font-semibold">#{t}</span>)}
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
             <button type="button" onClick={() => { if (navigator.share) navigator.share({ title: item.title, url: location.href }).catch(()=>{}); else navigator.clipboard.writeText(location.href); }} className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold hover:bg-secondary">
