@@ -135,11 +135,13 @@ export const news: NewsItem[] = [
     slug: "semana-do-meio-ambiente-2026",
     title: "Semana do Meio Ambiente reúne comunidades em torno do território",
     subtitle: "Uma semana de oficinas, plantios e rodas de conversa em cinco comunidades",
-    category: "Educação ambiental",
+    category: "Meio ambiente",
     date: "2026-06-05",
     author: "Equipe de Comunicação",
     cover:
       "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Encerramento da Semana do Meio Ambiente reuniu comunidades e famílias parceiras.",
+    coverCredit: "Foto: Arquivo Instituto",
     excerpt:
       "Programação envolveu mais de 800 pessoas em atividades ao ar livre, plantios e mediações de leitura.",
     body: [
@@ -148,16 +150,27 @@ export const news: NewsItem[] = [
       "As ações reforçam o compromisso com a educação ambiental como prática cotidiana, construída em diálogo com moradores, escolas e agentes locais.",
     ],
     tags: ["meio ambiente", "comunidade", "educação"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1400&q=80&auto=format&fit=crop", caption: "Roda de conversa na abertura", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&q=80&auto=format&fit=crop", caption: "Trilha guiada no território", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80&auto=format&fit=crop", caption: "Plantio comunitário", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop", caption: "Mata do território", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=80&auto=format&fit=crop", caption: "Mediação de leitura ao ar livre", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1400&q=80&auto=format&fit=crop", caption: "Jovens guardiões", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop", caption: "Oficina com estudantes", credit: "Arquivo Instituto" },
+      { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80&auto=format&fit=crop", caption: "Encontro de saberes", credit: "Arquivo Instituto" },
+    ],
   },
   {
     slug: "biblioteca-verde-amplia-acervo",
     title: "Biblioteca Verde amplia acervo com publicações sobre biodiversidade",
     subtitle: "Nova coleção reúne pesquisas, cartilhas e literatura infantojuvenil",
-    category: "Biblioteca",
+    category: "Biblioteca e leitura",
     date: "2026-05-18",
     author: "Coordenação de Acervo",
     cover:
       "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Novos títulos passam a compor o acervo da Biblioteca Verde.",
     excerpt:
       "Mais de 300 novos títulos passam a compor o acervo ambiental e cultural aberto à comunidade.",
     body: [
@@ -165,6 +178,12 @@ export const news: NewsItem[] = [
       "O acervo está disponível para consulta e empréstimo, com mediações semanais realizadas por educadores e voluntários.",
     ],
     tags: ["biblioteca", "leitura", "acervo"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=80&auto=format&fit=crop", caption: "Acervo da Biblioteca Verde" },
+      { src: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1400&q=80&auto=format&fit=crop", caption: "Mediação de leitura" },
+      { src: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=80&auto=format&fit=crop", caption: "Espaço de leitura" },
+      { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop", caption: "Encontro de leitores" },
+    ],
   },
   {
     slug: "mutirao-de-plantio",
@@ -175,6 +194,7 @@ export const news: NewsItem[] = [
     author: "Coordenação de Projetos",
     cover:
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Voluntários no plantio de mudas nativas.",
     excerpt:
       "Foram plantadas 500 mudas nativas em torno de uma nascente comunitária recuperada por voluntários.",
     body: [
@@ -182,38 +202,56 @@ export const news: NewsItem[] = [
       "A ação integra o projeto Guardiões do Território e conta com monitoramento ambiental permanente.",
     ],
     tags: ["plantio", "nascente", "mutirão"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80&auto=format&fit=crop", caption: "Plantio de mudas" },
+      { src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&q=80&auto=format&fit=crop", caption: "Preparação do solo" },
+      { src: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1400&q=80&auto=format&fit=crop", caption: "Voluntários no campo" },
+      { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop", caption: "Nascente recuperada" },
+    ],
   },
   {
     slug: "encontro-de-saberes",
     title: "Encontro de Saberes valoriza mestres e mestras da comunidade",
     subtitle: "Roda de conversa reuniu gerações em torno de ofícios e memórias",
-    category: "Cultura",
+    category: "Ação cultural",
     date: "2026-03-30",
     author: "Coordenação Cultural",
     cover:
       "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Mestras e mestres em roda de conversa aberta ao público.",
     excerpt:
       "Mestras e mestres compartilharam ofícios, cantos e histórias em um encontro aberto ao público.",
     body: [
       "O Encontro de Saberes reuniu mestras e mestres da comunidade em uma roda de conversa aberta ao público, com apresentações culturais e trocas intergeracionais.",
     ],
     tags: ["cultura", "memória", "comunidade"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80&auto=format&fit=crop", caption: "Roda de saberes" },
+      { src: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1400&q=80&auto=format&fit=crop", caption: "Participação comunitária" },
+      { src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1400&q=80&auto=format&fit=crop", caption: "Apresentação cultural" },
+    ],
   },
   {
     slug: "novo-ciclo-formativo",
     title: "Novo ciclo formativo para jovens educadores começa em agosto",
     subtitle: "Inscrições abertas para 40 vagas com bolsa-auxílio",
-    category: "Projetos",
+    category: "Educação ambiental",
     date: "2026-07-01",
     author: "Coordenação Pedagógica",
     cover:
       "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&q=80&auto=format&fit=crop",
+    coverCaption: "Jovens em formação de educadores ambientais.",
     excerpt:
       "Programa forma jovens educadores ambientais em parceria com escolas e universidades da região.",
     body: [
       "O programa de formação de jovens educadores ambientais abre inscrições para 40 vagas, com bolsa-auxílio e certificação.",
     ],
     tags: ["formação", "juventude", "educação"],
+    gallery: [
+      { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop" },
+      { src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1400&q=80&auto=format&fit=crop" },
+      { src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1400&q=80&auto=format&fit=crop" },
+    ],
   },
   {
     slug: "parceria-institucional",
@@ -230,6 +268,51 @@ export const news: NewsItem[] = [
       "A parceria firmada neste mês amplia a atuação do Instituto em quatro novas comunidades rurais, com foco em educação ambiental e cultura.",
     ],
     tags: ["parceria", "institucional"],
+  },
+  {
+    slug: "oficina-arte-natureza",
+    title: "Oficina de arte e natureza une expressão e biodiversidade",
+    subtitle: "Estudantes exploraram materiais naturais em processos criativos",
+    category: "Oficinas",
+    date: "2025-11-10",
+    author: "Coordenação Cultural",
+    cover:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1600&q=80&auto=format&fit=crop",
+    excerpt: "Estudantes produziram obras utilizando folhas, sementes e pigmentos naturais.",
+    body: [
+      "A oficina reuniu 60 estudantes em quatro dias de imersão, explorando técnicas de arte com materiais naturais coletados no território.",
+    ],
+    tags: ["oficina", "arte", "educação"],
+  },
+  {
+    slug: "festival-cultural-territorio",
+    title: "Festival Cultural do Território celebra 15 anos de atuação",
+    subtitle: "Programação teve música, feira agroecológica e apresentações",
+    category: "Eventos",
+    date: "2025-08-22",
+    author: "Equipe de Comunicação",
+    cover:
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1600&q=80&auto=format&fit=crop",
+    excerpt: "Mais de 2 mil pessoas participaram do festival aberto e gratuito.",
+    body: [
+      "O Festival Cultural do Território marcou os 15 anos do Instituto com apresentações musicais, feira agroecológica e mostra de projetos comunitários.",
+    ],
+    tags: ["festival", "aniversário", "cultura"],
+  },
+  {
+    slug: "assembleia-comunitaria",
+    title: "Assembleia comunitária define prioridades para o próximo ciclo",
+    subtitle: "Moradores participaram da construção coletiva do plano de ação",
+    category: "Comunidade",
+    date: "2024-10-05",
+    author: "Mobilização Comunitária",
+    cover:
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1600&q=80&auto=format&fit=crop",
+    excerpt: "Encontro reuniu representantes das comunidades atendidas para debater os próximos passos.",
+    body: [
+      "A assembleia contou com a participação de mais de 120 pessoas e resultou em diretrizes para os próximos dois anos de atuação.",
+    ],
+    tags: ["assembleia", "participação", "planejamento"],
   },
 ];
 
