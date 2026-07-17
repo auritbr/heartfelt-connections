@@ -255,14 +255,50 @@ export const projectPages: ProjectPage[] = [
     heroImage:
       "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=2000&q=80&auto=format&fit=crop",
     accent: "moss",
-    presentation: {
-      title: "Juventude que cuida do território onde vive",
-      body: [
-        "O Guardiões do Território forma jovens das comunidades para atuarem como agentes ambientais: observando, cuidando e mobilizando o entorno.",
-        "A trilha formativa combina vivências em campo, estudo do território e ações práticas — plantios, mutirões de limpeza e monitoramento de áreas de proteção.",
-        "É um projeto de pertencimento: reconhecer que o território é casa comum e que sua defesa começa pelas pessoas que ali vivem.",
+    about: {
+      title: "Sobre o projeto",
+      intro:
+        "O Guardiões do Território é uma iniciativa de educação ambiental que forma crianças, jovens e adultos para atuarem como agentes protetores do meio ambiente em suas comunidades.",
+      paragraphs: [
+        "O projeto valoriza o vínculo entre as pessoas e o lugar onde vivem, reconhecendo que a preservação ambiental depende, antes de tudo, da relação afetiva com o território. Por meio de vivências, oficinas, atividades ao ar livre e ações práticas, o projeto fortalece o cuidado com a natureza e com os espaços comunitários.",
+        "As ações incluem trilhas ecológicas, mutirões ambientais, oficinas de sustentabilidade, práticas de agroecologia, monitoramento e cuidado com áreas verdes.",
+      ],
+      highlight:
+        "Cuidar do território é cuidar da vida — e esse cuidado se aprende, se pratica e se compartilha entre gerações.",
+      image:
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80&auto=format&fit=crop",
+      imageCaption: "Trilha formativa com jovens agentes ambientais.",
+    },
+    cards: {
+      title: "Caminhos de aprendizagem e cuidado",
+      items: [
+        {
+          title: "Trilhas ecológicas",
+          text: "Vivências guiadas que aproximam os participantes da fauna, da flora e do ciclo das águas do território.",
+          image:
+            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Mutirões ambientais",
+          text: "Ações coletivas de plantio, limpeza e restauração de espaços comunitários e áreas verdes.",
+          image:
+            "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Oficinas de sustentabilidade",
+          text: "Encontros formativos sobre agroecologia, resíduos, água, biodiversidade e práticas de vida sustentável.",
+          image:
+            "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Monitoramento comunitário",
+          text: "Práticas de observação e cuidado com nascentes, matas e áreas de proteção, junto às moradoras e moradores.",
+          image:
+            "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1200&q=80&auto=format&fit=crop",
+        },
       ],
     },
+
     objectives: [
       "Formar jovens agentes ambientais comprometidos com o território.",
       "Monitorar áreas de proteção e nascentes junto à comunidade.",
