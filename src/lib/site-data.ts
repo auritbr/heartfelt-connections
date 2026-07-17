@@ -105,6 +105,18 @@ export type ProjectPage = {
   shortDescription: string;
   heroImage: string;
   accent: "forest" | "moss" | "river" | "ochre" | "earth";
+  about: {
+    title: string;
+    intro: string;
+    paragraphs: string[];
+    highlight?: string;
+    image: string;
+    imageCaption?: string;
+  };
+  cards: {
+    title: string;
+    items: { title: string; text: string; image: string }[];
+  };
   presentation: { title: string; body: string[] };
   objectives: string[];
   audiences: string[];
@@ -112,8 +124,9 @@ export type ProjectPage = {
   gallery: string[];
   linkedAlbumProject?: string; // matches albums[].project for filtering
   facts: { label: string; value: string }[];
-  cta: { title: string; text: string };
+  cta: { title: string; text: string; image: string };
 };
+
 
 export const projectPages: ProjectPage[] = [
   {
