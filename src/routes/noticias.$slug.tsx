@@ -3,7 +3,6 @@ import { useState } from "react";
 import { news, formatDate, type NewsItem, type NewsPhoto } from "@/lib/site-data";
 import { Lightbox } from "@/components/ui/Lightbox";
 import {
-  ArrowLeft,
   ArrowRight,
   ChevronRight,
   Clock,
@@ -56,9 +55,7 @@ function estimateReadingTime(paragraphs: string[]) {
 
 function NoticiaPage() {
   const item = Route.useLoaderData() as NewsItem;
-  const idx = news.findIndex((n) => n.slug === item.slug);
-  const prev = news[idx - 1];
-  const next = news[idx + 1];
+
   
   const readingTime = estimateReadingTime(item.body);
   const [lb, setLb] = useState<number | null>(null);
@@ -360,40 +357,47 @@ function NoticiaPage() {
         );
       })()}
 
-
-      {/* Navegação inferior */}
-      <section className="section-y bg-[color:var(--paper)]">
-        <div className="container-narrow flex flex-wrap items-center justify-between gap-3">
-          {prev ? (
-            <Link
-              to="/noticias/$slug"
-              params={{ slug: prev.slug }}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--forest)] hover:underline"
+      {/* CTA final */}
+      <section className="pb-24">
+        <div className="container-narrow">
+          <div className="relative overflow-hidden rounded-3xl border bg-[color:var(--leaf)]/30 p-8 md:p-12 text-center">
+            <svg
+              aria-hidden
+              className="pointer-events-none absolute -top-10 -right-10 h-56 w-56 text-[color:var(--moss)]/15"
+              viewBox="0 0 200 200"
             >
-              <ArrowLeft className="h-4 w-4" /> Notícia anterior
-            </Link>
-          ) : (
-            <span />
-          )}
-          <Link
-            to="/noticias"
-            className="inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]"
-          >
-            Voltar para Notícias
-          </Link>
-          {next ? (
-            <Link
-              to="/noticias/$slug"
-              params={{ slug: next.slug }}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--forest)] hover:underline"
-            >
-              Próxima notícia <ArrowRight className="h-4 w-4" />
-            </Link>
-          ) : (
-            <span />
-          )}
+              <path
+                d="M100 10 C 150 30 180 70 170 120 C 160 170 110 190 60 170 C 20 150 10 100 30 60 C 50 25 80 5 100 10 Z"
+                fill="currentColor"
+              />
+            </svg>
+            <div className="relative">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">
+                Continue acompanhando nossas ações
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-sm md:text-base text-muted-foreground">
+                Veja outras notícias, acompanhe nossos projetos e conheça mais de perto o trabalho que une cultura,
+                educação ambiental e comunidade.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <Link
+                  to="/noticias"
+                  className="inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]"
+                >
+                  Ver todas as notícias <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/contato"
+                  className="inline-flex items-center gap-2 rounded-full border border-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--forest)] hover:bg-white"
+                >
+                  Fale conosco
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
     </>
   );
 }

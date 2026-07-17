@@ -50,23 +50,24 @@ function ContatoPage() {
         crumbs={[{ to: "/", label: "Início" }, { label: "Contato" }]}
       />
 
+      {/* Seção principal — Informações à esquerda, Formulário à direita */}
       <section className="section-y">
-        <div className="container-narrow grid gap-8 lg:grid-cols-[1.05fr_1fr]">
-          {/* Coluna esquerda: informações sobre fotografia ambiental */}
-          <aside className="relative overflow-hidden rounded-3xl bg-[color:var(--forest)] text-[color:var(--paper)] p-6 md:p-10 min-h-[560px]">
+        <div className="container-narrow grid gap-8 lg:gap-10 lg:grid-cols-[1fr_1.1fr] items-start">
+          {/* Coluna esquerda: informações */}
+          <aside className="relative overflow-hidden rounded-3xl bg-[color:var(--forest)] text-[color:var(--paper)] p-6 md:p-10">
             <img
               src="https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1600&q=80&auto=format&fit=crop"
               alt=""
               aria-hidden
-              className="absolute inset-0 h-full w-full object-cover opacity-30"
+              className="absolute inset-0 h-full w-full object-cover opacity-25"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--forest)]/85 via-[color:var(--forest)]/70 to-[color:var(--forest)]/90" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[color:var(--forest)]/90 via-[color:var(--forest)]/75 to-[color:var(--forest)]/90" />
             <svg viewBox="0 0 200 60" aria-hidden className="relative h-6 w-32 text-[color:var(--ochre)] mb-4">
               <path d="M2 30 C 40 5 80 55 120 30 C 160 5 195 40 198 30" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" />
             </svg>
             <div className="relative">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--leaf)]">Fale conosco</p>
-              <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold">
+              <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold">
                 Informações de contato
               </h2>
               <p className="mt-3 text-sm text-[color:var(--paper)]/85 max-w-md">
@@ -84,9 +85,9 @@ function ContatoPage() {
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 backdrop-blur">
                       <c.icon className="h-4 w-4 text-[color:var(--leaf)]" aria-hidden />
                     </span>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-[11px] font-semibold uppercase tracking-widest text-[color:var(--leaf)]">{c.label}</p>
-                      <p className="mt-0.5 text-[color:var(--paper)]">{c.value}</p>
+                      <p className="mt-0.5 text-[color:var(--paper)] break-words">{c.value}</p>
                     </div>
                   </li>
                 ))}
@@ -102,13 +103,9 @@ function ContatoPage() {
               </div>
             </div>
           </aside>
-        </div>
-      </section>
 
-
-      <section className="section-y bg-[color:var(--paper)]">
-        <div className="container-narrow grid gap-10 lg:grid-cols-2">
-          <div>
+          {/* Coluna direita: formulário */}
+          <div className="rounded-3xl border bg-card p-6 md:p-10 shadow-sm">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">Envie uma mensagem</h2>
             <p className="mt-2 text-sm text-muted-foreground">Retornamos em até 3 dias úteis.</p>
             {sent && (
@@ -148,11 +145,25 @@ function ContatoPage() {
               <button type="submit" className="w-fit rounded-full bg-[color:var(--forest)] px-6 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">Enviar mensagem</button>
             </form>
           </div>
+        </div>
+      </section>
 
-          <div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-[color:var(--forest)]">Onde estamos</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{site.address}</p>
-            <div className="mt-4 aspect-[4/3] w-full overflow-hidden rounded-2xl border bg-card">
+      {/* Mapa — card refinado e moderado */}
+      <section className="pb-16 md:pb-20">
+        <div className="container-narrow">
+          <div className="relative overflow-hidden rounded-3xl border bg-[color:var(--paper)]/60 p-4 md:p-6 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-2 px-2 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-[color:var(--leaf)]/60 text-[color:var(--forest)]">
+                  <MapPin className="h-4 w-4" aria-hidden />
+                </span>
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-[color:var(--moss)]">Onde estamos</p>
+                  <p className="text-sm font-medium text-[color:var(--forest)]">{site.address}</p>
+                </div>
+              </div>
+            </div>
+            <div className="aspect-[16/8] w-full overflow-hidden rounded-2xl border bg-card">
               <iframe
                 title="Localização"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=-46.65%2C-23.56%2C-46.62%2C-23.54&layer=mapnik"
@@ -160,18 +171,10 @@ function ContatoPage() {
                 loading="lazy"
               />
             </div>
-            <div className="mt-6">
-              <h3 className="text-sm font-semibold text-[color:var(--forest)]">Redes sociais</h3>
-              <div className="mt-3 flex gap-3">
-                <a href={site.social.instagram} aria-label="Instagram" className="rounded-full border p-2.5 hover:bg-secondary"><Instagram className="h-4 w-4" /></a>
-                <a href={site.social.facebook} aria-label="Facebook" className="rounded-full border p-2.5 hover:bg-secondary"><Facebook className="h-4 w-4" /></a>
-                <a href={site.social.youtube} aria-label="YouTube" className="rounded-full border p-2.5 hover:bg-secondary"><Youtube className="h-4 w-4" /></a>
-                <a href={site.social.linkedin} aria-label="LinkedIn" className="rounded-full border p-2.5 hover:bg-secondary"><Linkedin className="h-4 w-4" /></a>
-              </div>
-            </div>
           </div>
         </div>
       </section>
+
     </>
   );
 }
