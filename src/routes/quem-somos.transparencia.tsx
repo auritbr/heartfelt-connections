@@ -91,7 +91,7 @@ function Transparencia() {
           <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--forest)]/85 via-[color:var(--forest)]/55 to-[color:var(--forest)]/70" />
         </div>
 
-        <div className="container-narrow relative pt-28 md:pt-36 pb-16 md:pb-24">
+        <div className="container-narrow relative pt-28 md:pt-32 pb-24 md:pb-32">
           <nav aria-label="Breadcrumb" className="text-xs text-[color:var(--paper)]/85">
             <ol className="flex flex-wrap items-center gap-1">
               <li>
@@ -106,8 +106,8 @@ function Transparencia() {
             </ol>
           </nav>
 
-          {/* Painel institucional claro sobreposto */}
-          <div className="mt-8 mx-auto max-w-3xl rounded-3xl bg-white/95 backdrop-blur-sm border border-white/60 shadow-[0_30px_80px_-30px_rgba(20,50,30,0.45)] px-6 py-10 md:px-12 md:py-14 text-center">
+          {/* Painel institucional claro sobreposto (parcialmente sobre a imagem) */}
+          <div className="relative mt-8 mx-auto max-w-3xl rounded-3xl bg-white/95 backdrop-blur-sm border border-white/60 shadow-[0_30px_80px_-30px_rgba(20,50,30,0.45)] px-6 py-10 md:px-12 md:py-12 text-center mb-[-64px] md:mb-[-96px]">
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--moss)]/30 bg-[color:var(--leaf)]/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--forest)]">
               <Archive className="h-3 w-3" /> Transparência
             </span>
@@ -123,8 +123,9 @@ function Transparencia() {
       </section>
 
 
-      {/* Accordions compactos */}
-      <section className="pb-10 md:pb-12">
+      {/* Accordions compactos — com respiro do painel */}
+      <section className="pt-24 md:pt-32 pb-10 md:pb-12">
+
         <div className="mx-auto max-w-3xl px-4 space-y-2.5">
           {transparencyCategories.map((c) => {
             const docs = byCategory.get(c) ?? [];
@@ -213,7 +214,8 @@ function Transparencia() {
       </section>
 
       {/* CTA final */}
-      <section className="pb-12 md:pb-16">
+      <section className="pb-10 md:pb-14">
+
         <div className="container-narrow">
           <div className="relative overflow-hidden rounded-3xl border bg-[color:var(--leaf)]/30 p-8 md:p-12 text-center">
             <svg

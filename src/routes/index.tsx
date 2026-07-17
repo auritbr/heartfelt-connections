@@ -57,21 +57,22 @@ function HomePage() {
                 <Leaf className="h-3.5 w-3.5" aria-hidden /> Ponto de Cultura · Educação Ambiental
               </span>
               <h1 className="mt-6 font-display text-[2.5rem] sm:text-5xl lg:text-[4.2rem] font-extrabold leading-[1.02] tracking-tight">
-                Cultura que <em className="not-italic text-[color:var(--ochre)]">nasce do território</em><br />
-                e cresce com a <span className="underline decoration-[color:var(--leaf)] decoration-[6px] underline-offset-[10px]">comunidade</span>
+                Cultura que <em className="not-italic text-[color:var(--ochre)]">cria raízes</em><br />
+                e transforma <span className="underline decoration-[color:var(--leaf)] decoration-[6px] underline-offset-[10px]">territórios</span>
               </h1>
               <RiverLine className="mt-6 h-4 w-56 text-[color:var(--leaf)]" />
               <p className="mt-6 max-w-xl text-lg text-[color:var(--paper)]/90">
-                Somos um Ponto de Cultura dedicado à educação ambiental, à leitura, à memória do território e à construção de uma relação mais viva entre pessoas, saberes e natureza.
+                Unimos educação ambiental, leitura, cultura e participação comunitária para fortalecer pessoas e construir novas relações com o meio ambiente.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link to="/quem-somos" className="inline-flex items-center gap-2 rounded-full bg-[color:var(--ochre)] px-6 py-3 text-sm font-semibold text-[color:var(--forest)] hover:brightness-105 shadow-lg shadow-black/20">
                   Conheça nossa história <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link to="/galeria" className="inline-flex items-center gap-2 rounded-full border border-[color:var(--paper)]/50 px-6 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--paper)]/10">
-                  Ver o território em imagens
+                <Link to="/noticias" className="inline-flex items-center gap-2 rounded-full border border-[color:var(--paper)]/50 px-6 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--paper)]/10">
+                  Veja nossas ações
                 </Link>
               </div>
+
             </div>
 
             {/* Photo composition */}
@@ -129,12 +130,13 @@ function HomePage() {
           <div className="reveal">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Quem somos</p>
             <h2 className="mt-3 font-display text-4xl md:text-5xl font-extrabold text-[color:var(--forest)] leading-[1.05]">
-              Um espaço onde <span className="text-[color:var(--river)]">cultura</span> e <span className="text-[color:var(--moss)]">meio ambiente</span> caminham juntos
+              Um Ponto de Cultura onde <span className="text-[color:var(--river)]">conhecimento</span> e <span className="text-[color:var(--moss)]">natureza</span> caminham juntos
             </h2>
             <RiverLine className="mt-4 h-4 w-40 text-[color:var(--moss)]" />
             <p className="mt-5 text-base md:text-lg text-muted-foreground">
-              O {site.name} desenvolve ações culturais e educativas que aproximam comunidades, escolas, artistas, educadores e agentes ambientais. Oficinas, projetos de leitura, atividades ao ar livre e iniciativas de preservação fortalecem vínculos e incentivam o cuidado coletivo com o território.
+              Desenvolvemos ações que aproximam crianças, jovens, famílias, educadores, artistas e comunidades de experiências culturais e ambientais transformadoras. O {site.name} atua há mais de uma década na articulação entre território, saberes locais e biodiversidade.
             </p>
+
             <div className="mt-8 flex flex-wrap items-center gap-6">
               <Link to="/quem-somos" className="inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-6 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">
                 Conheça o Ponto de Cultura <ArrowRight className="h-4 w-4" />
@@ -153,10 +155,11 @@ function HomePage() {
         <div className="container-narrow">
           <div className="flex flex-wrap items-end justify-between gap-6 reveal">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">O que fazemos</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">O que orienta nossa caminhada</p>
               <h2 className="mt-2 font-display text-4xl md:text-5xl font-extrabold text-[color:var(--forest)] leading-tight">Frentes que se ramificam pelo território</h2>
             </div>
-            <p className="max-w-md text-muted-foreground">Ações permanentes que articulam cultura, educação, comunidade e biodiversidade — cada uma com sua própria raiz.</p>
+            <p className="max-w-md text-muted-foreground">Cultura e território, educação ambiental e biblioteca e leitura — três raízes que se desdobram em ações permanentes junto às comunidades.</p>
+
           </div>
 
           <div className="mt-12 grid gap-5 md:grid-cols-6 md:auto-rows-[minmax(180px,auto)]">
@@ -215,7 +218,8 @@ function HomePage() {
         <div className="container-narrow relative py-20 md:py-28">
           <div className="max-w-2xl reveal">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--leaf)]">Nosso impacto</p>
-            <h2 className="mt-2 font-display text-4xl md:text-5xl font-extrabold leading-tight">Raízes que se espalham pelo território</h2>
+            <h2 className="mt-2 font-display text-4xl md:text-5xl font-extrabold leading-tight">Resultados que crescem com a comunidade</h2>
+
           </div>
           <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {impact.map((it, i) => {
@@ -240,8 +244,9 @@ function HomePage() {
       <section className="section-y">
         <div className="container-narrow">
           <div className="max-w-2xl reveal">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Projetos</p>
-            <h2 className="mt-2 font-display text-4xl md:text-5xl font-extrabold text-[color:var(--forest)] leading-tight">Sementes que se tornaram trajetória</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Do conhecimento à ação</p>
+            <h2 className="mt-2 font-display text-4xl md:text-5xl font-extrabold text-[color:var(--forest)] leading-tight">Projetos que constroem trajetória</h2>
+
           </div>
 
           <div className="mt-14 space-y-20 md:space-y-28">
@@ -331,7 +336,8 @@ function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-4 reveal">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Comunicação</p>
-              <h2 className="mt-2 font-display text-4xl md:text-5xl font-extrabold text-[color:var(--forest)] leading-tight">Notícias e acontecimentos</h2>
+              <h2 className="mt-2 font-display text-4xl md:text-5xl font-extrabold text-[color:var(--forest)] leading-tight">Histórias que continuam sendo escritas</h2>
+
             </div>
             <Link to="/noticias" className="inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--forest)] hover:underline">
               Ver todas <ArrowRight className="h-4 w-4" />
@@ -376,28 +382,8 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 8. CHAMADA FINAL — ochre/terracota */}
-      <section className="relative isolate overflow-hidden bg-[color:var(--ochre)]">
-        <div className="absolute inset-0 opacity-25">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2000&q=80&auto=format&fit=crop" alt="" aria-hidden className="h-full w-full object-cover mix-blend-multiply" />
-        </div>
-        <div className="container-narrow relative py-20 md:py-24 text-center text-[color:var(--forest)]">
-          <BranchLine className="mx-auto h-16 w-16 text-[color:var(--forest)]/60" />
-          <h2 className="mt-4 font-display text-4xl md:text-5xl font-extrabold max-w-3xl mx-auto leading-tight">
-            Cada pessoa pode fazer parte desta transformação
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-[color:var(--forest)]/85 text-lg">
-            Participe das nossas ações, acompanhe os projetos e ajude a fortalecer a cultura e o cuidado com o meio ambiente.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/contato" className="inline-flex items-center rounded-full bg-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">Entre em contato</Link>
-            <a href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMessage)}`} target="_blank" rel="noreferrer noopener" className="inline-flex items-center rounded-full border-2 border-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--forest)] hover:bg-[color:var(--forest)]/10">Fale pelo WhatsApp</a>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. PARCEIROS */}
-      <section className="section-y">
+      {/* 8. PARCEIROS — antes do fecho */}
+      <section className="py-14 md:py-20">
         <div className="container-narrow">
           <div className="flex flex-col items-center text-center gap-3 reveal">
             <Handshake className="h-6 w-6 text-[color:var(--moss)]" />
@@ -414,31 +400,26 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 10. NEWSLETTER */}
-      <section className="bg-[color:var(--paper)] paper-texture border-t">
-        <div className="container-narrow py-14 grid gap-8 md:grid-cols-2 md:items-center">
-          <div>
-            <h2 className="font-display text-2xl md:text-3xl font-extrabold text-[color:var(--forest)]">Receba nossas novidades</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Informativo com projetos, oficinas, editais e chamadas do Ponto de Cultura.</p>
+      {/* 9. CHAMADA FINAL — fecho da página, próxima ao footer */}
+      <section className="relative isolate overflow-hidden bg-[color:var(--ochre)]">
+        <div className="absolute inset-0 opacity-25">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2000&q=80&auto=format&fit=crop" alt="" aria-hidden className="h-full w-full object-cover mix-blend-multiply" />
+        </div>
+        <div className="container-narrow relative py-16 md:py-20 text-center text-[color:var(--forest)]">
+          <BranchLine className="mx-auto h-14 w-14 text-[color:var(--forest)]/60" />
+          <h2 className="mt-3 font-display text-3xl md:text-5xl font-extrabold max-w-3xl mx-auto leading-tight">
+            Cada transformação começa com uma aproximação
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-[color:var(--forest)]/85 text-base md:text-lg">
+            Participe das atividades, proponha parcerias, acompanhe as ações ou ajude a fortalecer esse trabalho.
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <Link to="/contato" className="inline-flex items-center rounded-full bg-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">Entre em contato</Link>
+            <Link to="/noticias" className="inline-flex items-center rounded-full border-2 border-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--forest)] hover:bg-[color:var(--forest)]/10">Conheça nossas ações</Link>
           </div>
-          <form
-            onSubmit={(e) => { e.preventDefault(); (e.currentTarget as HTMLFormElement).reset(); alert("Obrigado! Inscrição registrada."); }}
-            className="grid gap-3"
-          >
-            <div className="grid gap-3 sm:grid-cols-2">
-              <input required name="name" placeholder="Nome" aria-label="Nome" className="rounded-md border bg-background px-3 py-2.5 text-sm" />
-              <input required type="email" name="email" placeholder="E-mail" aria-label="E-mail" className="rounded-md border bg-background px-3 py-2.5 text-sm" />
-            </div>
-            <label className="flex gap-2 text-xs text-muted-foreground">
-              <input required type="checkbox" className="mt-0.5 h-4 w-4 accent-[color:var(--forest)]" />
-              <span>Autorizo o envio de comunicações institucionais, conforme a <Link to="/politica-de-privacidade" className="underline">Política de Privacidade</Link>.</span>
-            </label>
-            <button type="submit" className="justify-self-start inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">
-              Inscrever-me <ArrowRight className="h-4 w-4" />
-            </button>
-          </form>
         </div>
       </section>
+
     </>
   );
 }

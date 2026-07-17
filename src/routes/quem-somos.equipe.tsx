@@ -28,36 +28,66 @@ function EquipePage() {
         crumbs={[{ to: "/", label: "Início" }, { to: "/quem-somos", label: "Quem Somos" }, { label: "Nossa Equipe" }]}
       />
 
-      <section className="section-y relative overflow-hidden">
-        {/* Composição orgânica ao fundo — folhagem sutil */}
+      <section className="relative overflow-hidden bg-[color:var(--paper)]/50 pt-16 md:pt-20 pb-4 md:pb-8">
+        {/* Composição de árvore ao fundo — copa, tronco e ramificações */}
         <svg
           aria-hidden
-          viewBox="0 0 800 800"
-          className="pointer-events-none absolute -top-20 -right-32 h-[520px] w-[520px] text-[color:var(--moss)]/8"
+          viewBox="0 0 1000 900"
+          preserveAspectRatio="xMidYMid slice"
+          className="pointer-events-none absolute inset-0 h-full w-full text-[color:var(--moss)]"
         >
-          <path
-            d="M400 60 C 560 100 700 220 680 400 C 660 580 500 700 340 680 C 180 660 100 500 120 340 C 140 180 260 40 400 60 Z"
-            fill="currentColor"
-          />
-        </svg>
-        <svg
-          aria-hidden
-          viewBox="0 0 800 800"
-          className="pointer-events-none absolute -bottom-28 -left-32 h-[420px] w-[420px] text-[color:var(--leaf)]/40"
-        >
-          <ellipse cx="400" cy="400" rx="360" ry="280" fill="currentColor" />
+          {/* copa em nuvens sobrepostas */}
+          <g opacity="0.09" fill="currentColor">
+            <ellipse cx="500" cy="230" rx="360" ry="180" />
+            <ellipse cx="310" cy="280" rx="200" ry="130" />
+            <ellipse cx="700" cy="270" rx="220" ry="140" />
+            <ellipse cx="500" cy="150" rx="220" ry="110" />
+          </g>
+          {/* ramificações */}
+          <g fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" opacity="0.22">
+            <path d="M500 900 C 500 700 500 550 500 400" />
+            <path d="M500 520 C 420 500 350 460 280 420" />
+            <path d="M500 500 C 580 480 660 440 740 400" />
+            <path d="M500 620 C 400 600 320 570 230 540" />
+            <path d="M500 600 C 610 580 700 560 800 530" />
+            <path d="M500 720 C 420 720 340 720 260 720" />
+            <path d="M500 720 C 600 720 700 720 780 720" />
+          </g>
+          {/* folhas nas pontas */}
+          <g fill="currentColor" opacity="0.18">
+            <ellipse cx="280" cy="420" rx="14" ry="7" transform="rotate(-25 280 420)" />
+            <ellipse cx="740" cy="400" rx="14" ry="7" transform="rotate(25 740 400)" />
+            <ellipse cx="230" cy="540" rx="14" ry="7" transform="rotate(-20 230 540)" />
+            <ellipse cx="800" cy="530" rx="14" ry="7" transform="rotate(20 800 530)" />
+            <ellipse cx="260" cy="720" rx="14" ry="7" transform="rotate(-10 260 720)" />
+            <ellipse cx="780" cy="720" rx="14" ry="7" transform="rotate(10 780 720)" />
+          </g>
         </svg>
 
         <div className="container-narrow relative">
-          <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">Equipe</p>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold text-[color:var(--forest)]">
+              Uma árvore de saberes e histórias
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Cada pessoa é uma raiz, um galho ou uma folha desta caminhada coletiva pela cultura e pelo meio ambiente.
+            </p>
+          </div>
+
+          <div className="mt-12 md:mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m) => (
-              <article key={m.slug} className="group flex flex-col items-center text-center">
-                <div className="relative w-full max-w-[240px] mx-auto">
-                  {/* Recorte orgânico refinado — silhueta de folha via border-radius assimétrico */}
-                  <div
-                    className="aspect-[4/5] w-full overflow-hidden bg-[color:var(--leaf)]/40 shadow-[0_18px_40px_-20px_rgba(20,60,30,0.35)] ring-1 ring-[color:var(--moss)]/15 transition-transform duration-500 group-hover:-translate-y-1"
-                    style={{ borderRadius: "62% 38% 55% 45% / 48% 52% 48% 52%" }}
-                  >
+              <article
+                key={m.slug}
+                className="group relative flex flex-col items-center text-center rounded-[28px] border border-[color:var(--moss)]/20 bg-white p-4 pb-6 shadow-[0_10px_30px_-18px_rgba(20,60,30,0.25)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_18px_40px_-18px_rgba(20,60,30,0.35)]"
+              >
+                {/* filete verde superior — nervura */}
+                <span
+                  aria-hidden
+                  className="absolute left-6 right-6 top-0 h-[3px] rounded-b-full bg-gradient-to-r from-transparent via-[color:var(--moss)]/60 to-transparent"
+                />
+                <div className="relative w-full">
+                  <div className="aspect-[4/5] w-full overflow-hidden rounded-[22px] bg-[color:var(--leaf)]/40 ring-1 ring-[color:var(--moss)]/15">
                     <img
                       src={m.photo}
                       alt={m.name}
@@ -65,25 +95,38 @@ function EquipePage() {
                       loading="lazy"
                     />
                   </div>
-                  {/* Pequeno detalhe orgânico — ponto/semente */}
-                  <span
+                  {/* pequena folha decorativa no canto */}
+                  <svg
                     aria-hidden
-                    className="absolute -bottom-2 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-[color:var(--ochre)] ring-4 ring-background"
-                  />
+                    viewBox="0 0 40 40"
+                    className="absolute -top-2 -right-2 h-8 w-8 text-[color:var(--moss)]/70 rotate-12"
+                  >
+                    <path
+                      d="M4 30 C 8 12 22 4 36 8 C 34 22 22 34 6 34 Z M8 30 C 16 22 24 16 32 12"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </div>
-                <h3 className="mt-6 font-display text-lg font-bold text-[color:var(--forest)]">{m.name}</h3>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-widest text-[color:var(--moss)]">{m.role}</p>
+                <h3 className="mt-5 font-display text-base md:text-lg font-bold text-[color:var(--forest)] leading-tight">
+                  {m.name}
+                </h3>
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-widest text-[color:var(--moss)]">
+                  {m.role}
+                </p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="pb-12 md:pb-16">
-
+      {/* CTA final — próximo ao footer */}
+      <section className="pb-10 md:pb-14 pt-4">
         <div className="container-narrow">
-          <div className="relative overflow-hidden rounded-3xl border bg-[color:var(--leaf)]/30 p-8 md:p-12 text-center">
+          <div className="relative overflow-hidden rounded-3xl border bg-[color:var(--leaf)]/30 p-8 md:p-10 text-center">
             <svg
               aria-hidden
               className="pointer-events-none absolute -top-10 -left-10 h-52 w-52 text-[color:var(--moss)]/15"
