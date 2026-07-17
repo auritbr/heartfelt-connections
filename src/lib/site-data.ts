@@ -473,9 +473,12 @@ export const projectPages: ProjectPage[] = [
       { label: "Encontros abertos", value: "24/ano" },
     ],
     cta: {
-      title: "Participe do Cultura que Floresce",
-      text: "Inscreva-se nas oficinas, acompanhe os encontros e ajude a difundir a memória do território.",
+      title: "A cultura é feita com muitas mãos",
+      text: "Conheça as ações do Cultura que Floresce, participe das oficinas e some-se ao movimento que celebra a identidade do território.",
+      image:
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1400&q=80&auto=format&fit=crop",
     },
+
   },
 ];
 
