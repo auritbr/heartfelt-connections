@@ -354,6 +354,9 @@ function NoticiaPage() {
               </div>
             </div>
           </section>
+        );
+      })()}
+
       {/* CTA final */}
       <section className="pb-24">
         <div className="container-narrow">
