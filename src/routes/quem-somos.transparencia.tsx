@@ -126,23 +126,6 @@ function Transparencia() {
       {/* Accordions compactos — com respiro do painel */}
       <section className="pt-24 md:pt-32 pb-10 md:pb-12">
 
-            <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--moss)]/30 bg-[color:var(--leaf)]/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--forest)]">
-              <Archive className="h-3 w-3" /> Transparência
-            </span>
-            <h1 className="mt-5 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
-              Acervo institucional
-            </h1>
-            <p className="mt-4 mx-auto max-w-2xl text-sm md:text-base text-muted-foreground">
-              Acesse documentos, certificados, reconhecimentos, portfólios, relatórios e registros institucionais,
-              organizados por categoria para facilitar a consulta pública.
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-      {/* Accordions compactos */}
-      <section className="pb-10 md:pb-12">
         <div className="mx-auto max-w-3xl px-4 space-y-2.5">
           {transparencyCategories.map((c) => {
             const docs = byCategory.get(c) ?? [];
