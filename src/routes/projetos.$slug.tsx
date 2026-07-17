@@ -3,9 +3,9 @@ import { useMemo, useState } from "react";
 import { PageHero } from "@/components/layout/PageHero";
 import { LeafDivider, RiverLine, TopoRings, BranchLine } from "@/components/OrganicShapes";
 import { useReveal } from "@/hooks/use-reveal";
-import { projectPages, news } from "@/lib/site-data";
+import { projectPages } from "@/lib/site-data";
 import { Lightbox } from "@/components/ui/Lightbox";
-import { ArrowRight, Target, Users, Sparkles, Images, ChevronRight } from "lucide-react";
+import { ArrowRight, Target, Users, Sparkles, Images, ChevronRight, Leaf } from "lucide-react";
 
 import type { ProjectPage } from "@/lib/site-data";
 
@@ -53,7 +53,7 @@ function NotFoundProject() {
         to="/projetos"
         className="mt-6 inline-flex items-center rounded-full bg-[color:var(--forest)] px-5 py-3 text-sm font-semibold text-[color:var(--paper)]"
       >
-        Ver todos os projetos
+        Voltar para Projetos
       </Link>
     </div>
   );
@@ -66,25 +66,6 @@ function ProjetoDetail() {
 
   const photos = useMemo(
     () => project.gallery.map((src, i) => ({ src, alt: `${project.title} — foto ${i + 1}` })),
-    [project],
-  );
-
-  const related = useMemo(
-    () =>
-      projectPages.filter((p) => p.slug !== project.slug).slice(0, 2),
-    [project],
-  );
-
-  const linkedNews = useMemo(
-    () =>
-      news
-        .filter((n) =>
-          [n.title, n.excerpt, ...(n.tags ?? [])]
-            .join(" ")
-            .toLowerCase()
-            .includes(project.title.toLowerCase().split(" ")[0]),
-        )
-        .slice(0, 3),
     [project],
   );
 
@@ -102,53 +83,103 @@ function ProjetoDetail() {
         ]}
       />
 
-      {/* Presentation */}
+      {/* 1. Sobre o projeto */}
       <section className="relative bg-background">
-        <div className="container-narrow py-16 md:py-20 grid gap-10 lg:grid-cols-[1fr_.9fr] items-start">
+        <div className="container-narrow py-16 md:py-24 grid gap-12 lg:grid-cols-[1.05fr_.95fr] items-start">
           <div className="reveal">
             <div className="flex items-center gap-3">
               <RiverLine className="h-3 w-16 text-[color:var(--ochre)]" />
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">
-                Apresentação
+                {project.about.title}
               </p>
             </div>
-            <h2 className="mt-4 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
-              {project.presentation.title}
+            <h2 className="mt-4 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)] leading-tight">
+              {project.about.intro}
             </h2>
-            <div className="mt-5 space-y-4 text-foreground/80 leading-relaxed text-lg">
-              {project.presentation.body.map((p, i) => (
+            <div className="mt-6 space-y-4 text-foreground/80 leading-relaxed text-[17px]">
+              {project.about.paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
+            {project.about.highlight && (
+              <blockquote className="mt-8 relative rounded-2xl bg-[color:var(--leaf)]/30 border-l-4 border-[color:var(--moss)] p-6 text-[color:var(--forest)]">
+                <Leaf
+                  className="absolute -top-3 -left-3 h-8 w-8 rounded-full bg-[color:var(--forest)] p-1.5 text-[color:var(--leaf)]"
+                  aria-hidden
+                />
+                <p className="font-display text-lg font-semibold leading-snug">
+                  {project.about.highlight}
+                </p>
+              </blockquote>
+            )}
           </div>
-          <aside className="reveal relative">
-            <BranchLine className="absolute -top-8 -right-6 h-32 w-32 text-[color:var(--leaf)]/70" />
-            <div className="rounded-3xl border border-[color:var(--leaf)]/60 bg-[color:var(--paper)] p-6 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--moss)]">
-                Em números
-              </p>
-              <ul className="mt-4 grid gap-3">
-                {project.facts.map((f) => (
-                  <li
-                    key={f.label}
-                    className="flex items-baseline justify-between border-b border-dashed border-[color:var(--leaf)]/70 pb-2 last:border-0"
-                  >
-                    <span className="text-sm text-foreground/80">{f.label}</span>
-                    <span className="font-display text-2xl font-extrabold text-[color:var(--forest)]">
-                      {f.value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </aside>
+          <div className="reveal relative">
+            <BranchLine className="absolute -top-8 -right-6 h-40 w-40 text-[color:var(--leaf)]/70" aria-hidden />
+            <figure className="relative organic-blob overflow-hidden shadow-xl aspect-[4/5]">
+              <img
+                src={project.about.image}
+                alt={project.about.imageCaption ?? project.title}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </figure>
+            {project.about.imageCaption && (
+              <figcaption className="mt-3 text-xs text-muted-foreground text-center italic">
+                {project.about.imageCaption}
+              </figcaption>
+            )}
+          </div>
         </div>
         <LeafDivider color="var(--paper)" />
       </section>
 
-      {/* Objectives + Audiences */}
+      {/* 2. Cards temáticos */}
       <section className="relative bg-[color:var(--paper)] paper-texture">
-        <div className="container-narrow py-16 md:py-20 grid gap-10 md:grid-cols-2">
+        <TopoRings className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] text-[color:var(--moss)]/10" aria-hidden />
+        <div className="container-narrow py-16 md:py-24 relative">
+          <div className="reveal max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">
+              Frentes do projeto
+            </p>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
+              {project.cards.title}
+            </h2>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {project.cards.items.map((c, i) => (
+              <article
+                key={c.title}
+                className="reveal group overflow-hidden rounded-3xl bg-white border border-[color:var(--leaf)]/60 shadow-sm hover:-translate-y-1 hover:shadow-xl transition"
+                style={{ transitionDelay: `${i * 40}ms` }}
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2">
+                    <span className="grid h-7 w-7 place-items-center rounded-full bg-[color:var(--leaf)]/50 text-[color:var(--forest)]">
+                      <Leaf className="h-3.5 w-3.5" aria-hidden />
+                    </span>
+                    <h3 className="font-display text-lg font-bold text-[color:var(--forest)]">
+                      {c.title}
+                    </h3>
+                  </div>
+                  <p className="mt-3 text-sm text-foreground/75 leading-relaxed">{c.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Objetivos + Públicos */}
+      <section className="relative bg-background">
+        <div className="container-narrow py-16 md:py-20 grid gap-8 md:grid-cols-2">
           <div className="reveal rounded-3xl bg-white p-8 border border-[color:var(--leaf)]/60 shadow-sm">
             <div className="flex items-center gap-2">
               <Target className="h-5 w-5 text-[color:var(--forest)]" />
@@ -186,9 +217,46 @@ function ProjetoDetail() {
         </div>
       </section>
 
-      {/* Activities */}
+      {/* 4. Como funciona */}
+      <section className="relative bg-[color:var(--paper)] paper-texture">
+        <div className="container-narrow py-16 md:py-20 grid gap-10 lg:grid-cols-[1fr_.75fr] items-start">
+          <div className="reveal">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">
+              Como funciona
+            </p>
+            <h2 className="mt-3 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
+              {project.presentation.title}
+            </h2>
+            <div className="mt-5 space-y-4 text-foreground/80 leading-relaxed text-lg">
+              {project.presentation.body.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </div>
+          <aside className="reveal rounded-3xl border border-[color:var(--leaf)]/60 bg-white p-6 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--moss)]">
+              Em números
+            </p>
+            <ul className="mt-4 grid gap-3">
+              {project.facts.map((f) => (
+                <li
+                  key={f.label}
+                  className="flex items-baseline justify-between border-b border-dashed border-[color:var(--leaf)]/70 pb-2 last:border-0"
+                >
+                  <span className="text-sm text-foreground/80">{f.label}</span>
+                  <span className="font-display text-2xl font-extrabold text-[color:var(--forest)]">
+                    {f.value}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      {/* 5. Atividades */}
       <section className="relative bg-background">
-        <TopoRings className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] text-[color:var(--moss)]/10" />
+        <TopoRings className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] text-[color:var(--moss)]/10" aria-hidden />
         <div className="container-narrow py-16 md:py-20 relative">
           <div className="flex items-center gap-3 reveal">
             <Sparkles className="h-5 w-5 text-[color:var(--ochre)]" />
@@ -225,7 +293,7 @@ function ProjetoDetail() {
         </div>
       </section>
 
-      {/* Gallery */}
+      {/* 6. Galeria */}
       <section className="relative bg-[color:var(--paper)] paper-texture">
         <div className="container-narrow py-16 md:py-20">
           <div className="flex items-end justify-between gap-4 reveal">
@@ -274,92 +342,44 @@ function ProjetoDetail() {
         </div>
       </section>
 
-      {/* Related news */}
-      {linkedNews.length > 0 && (
-        <section className="relative bg-background">
-          <div className="container-narrow py-16 md:py-20">
-            <h2 className="font-display text-2xl md:text-3xl font-extrabold text-[color:var(--forest)] reveal">
-              Notícias relacionadas
-            </h2>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {linkedNews.map((n) => (
-                <Link
-                  key={n.slug}
-                  to="/noticias/$slug"
-                  params={{ slug: n.slug }}
-                  className="reveal group overflow-hidden rounded-2xl border bg-card shadow-sm hover:-translate-y-0.5 hover:shadow-lg transition"
-                >
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={n.cover}
-                      alt={n.title}
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <p className="text-[11px] uppercase tracking-widest text-[color:var(--moss)] font-semibold">
-                      {n.category}
-                    </p>
-                    <h3 className="mt-1 font-display text-base font-bold text-[color:var(--forest)] line-clamp-2">
-                      {n.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Related projects + CTA */}
-      <section className="relative bg-[color:var(--forest)] text-[color:var(--paper)]">
-        <TopoRings className="pointer-events-none absolute -bottom-40 -left-40 h-[500px] w-[500px] text-[color:var(--leaf)]/15" />
-        <div className="container-narrow py-16 md:py-20 relative grid gap-10 lg:grid-cols-[1.1fr_.9fr] items-center">
-          <div>
-            <RiverLine className="h-3 w-24 text-[color:var(--ochre)]" />
-            <h2 className="mt-4 font-display text-3xl md:text-4xl font-extrabold">
-              {project.cta.title}
-            </h2>
-            <p className="mt-4 text-[color:var(--paper)]/85 max-w-xl">{project.cta.text}</p>
-            <div className="mt-7 flex flex-wrap gap-3">
+      {/* 7. CTA final */}
+      <section className="relative bg-[color:var(--forest)] text-[color:var(--paper)] overflow-hidden">
+        <div className="absolute inset-0 -z-0 opacity-25">
+          <img
+            src={project.cta.image}
+            alt=""
+            aria-hidden
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[color:var(--forest)] via-[color:var(--forest)]/90 to-[color:var(--forest)]/60" />
+        </div>
+        <TopoRings className="pointer-events-none absolute -bottom-40 -right-40 h-[500px] w-[500px] text-[color:var(--leaf)]/15" aria-hidden />
+        <div className="container-narrow py-16 md:py-20 relative text-center">
+          <RiverLine className="mx-auto h-3 w-24 text-[color:var(--ochre)]" />
+          <h2 className="mt-4 font-display text-3xl md:text-4xl font-extrabold max-w-3xl mx-auto">
+            {project.cta.title}
+          </h2>
+          <p className="mt-4 text-[color:var(--paper)]/85 max-w-2xl mx-auto">
+            {project.cta.text}
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              to="/contato"
+              className="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[color:var(--forest)] hover:bg-[color:var(--leaf)] transition"
+            >
+              Entrar em contato
+            </Link>
+            {project.linkedAlbumProject && (
               <Link
-                to="/contato"
-                className="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[color:var(--forest)] hover:bg-[color:var(--leaf)]"
+                to="/galeria"
+                search={{ projeto: project.linkedAlbumProject }}
+                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition"
               >
-                Quero participar
+                <Images className="h-4 w-4" />
+                Ver galeria de fotos
               </Link>
-              <Link
-                to="/projetos"
-                className="inline-flex items-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
-              >
-                Ver todos os projetos
-              </Link>
-            </div>
-          </div>
-          <div className="grid gap-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--leaf)]">
-              Outros projetos
-            </p>
-            {related.map((r) => (
-              <Link
-                key={r.slug}
-                to="/projetos/$slug"
-                params={{ slug: r.slug }}
-                className="group flex items-center gap-4 rounded-2xl bg-white/5 border border-white/10 p-3 hover:bg-white/10 transition"
-              >
-                <div className="h-20 w-24 shrink-0 overflow-hidden organic-blob-2">
-                  <img src={r.heroImage} alt={r.title} className="h-full w-full object-cover" loading="lazy" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[11px] uppercase tracking-widest text-[color:var(--leaf)]">
-                    {r.category}
-                  </p>
-                  <h3 className="font-display text-lg font-bold truncate">{r.title}</h3>
-                </div>
-                <ArrowRight className="h-4 w-4 opacity-70 group-hover:translate-x-1 transition" />
-              </Link>
-            ))}
+            )}
           </div>
         </div>
       </section>
