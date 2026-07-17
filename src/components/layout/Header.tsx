@@ -182,15 +182,26 @@ export function Header() {
             {nav.map((item) =>
               "children" in item && item.children ? (
                 <div key={item.label} className="rounded-md">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-semibold"
-                    aria-expanded={openSub === item.label}
-                    onClick={() => setOpenSub((v) => (v === item.label ? null : item.label))}
-                  >
-                    {item.label}
-                    <ChevronDown className={`h-4 w-4 transition-transform ${openSub === item.label ? "rotate-180" : ""}`} />
-                  </button>
+                  <div className="flex items-center">
+                    <Link
+                      to={item.to}
+                      onClick={() => setOpen(false)}
+                      className="flex-1 rounded-md px-3 py-3 text-left text-sm font-semibold hover:bg-secondary"
+                    >
+                      {item.label}
+                    </Link>
+                    <button
+                      type="button"
+                      className="ml-1 grid h-11 w-11 place-items-center rounded-md hover:bg-secondary"
+                      aria-label={`${openSub === item.label ? "Fechar" : "Abrir"} submenu ${item.label}`}
+                      aria-expanded={openSub === item.label}
+                      onClick={() => setOpenSub((v) => (v === item.label ? null : item.label))}
+                    >
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${openSub === item.label ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  </div>
                   {openSub === item.label && (
                     <div className="ml-3 border-l pl-3">
                       {item.children.map((c) => (
@@ -206,6 +217,7 @@ export function Header() {
                     </div>
                   )}
                 </div>
+
               ) : (
                 <Link
                   key={item.to}
