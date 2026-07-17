@@ -61,7 +61,7 @@ function NotFoundProject() {
 
 function ProjetoDetail() {
   useReveal();
-  const { project } = Route.useLoaderData();
+  const { project } = Route.useLoaderData() as { project: ProjectPage };
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const photos = useMemo(
