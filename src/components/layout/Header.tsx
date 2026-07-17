@@ -102,15 +102,24 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-1" aria-label="Menu principal">
           {nav.map((item) =>
             "children" in item && item.children ? (
-              <div key={item.label} className="group relative">
+              <div key={item.label} className="group relative flex items-center">
                 <Link
                   to={item.to}
-                  className={`inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium ${linkBase} data-[status=active]:text-[color:var(--ochre)]`}
+                  className={`rounded-md pl-3 pr-1.5 py-2 text-sm font-medium ${linkBase} data-[status=active]:text-[color:var(--ochre)]`}
                   activeOptions={{ exact: false }}
                 >
                   {item.label}
-                  <ChevronDown className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180" aria-hidden />
                 </Link>
+                <button
+                  type="button"
+                  className={`inline-flex items-center justify-center rounded-md pr-2 pl-1 py-2 ${linkBase}`}
+                  aria-label={`Abrir submenu ${item.label}`}
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  tabIndex={-1}
+                >
+                  <ChevronDown className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180" aria-hidden />
+                </button>
                 <div className="invisible absolute left-0 top-full w-60 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="overflow-hidden rounded-lg border bg-popover shadow-lg">
                     {item.children.map((c) => (
@@ -126,6 +135,7 @@ export function Header() {
                   </div>
                 </div>
               </div>
+
             ) : (
               <Link
                 key={item.to}
