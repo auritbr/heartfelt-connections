@@ -298,6 +298,16 @@ export const projectPages: ProjectPage[] = [
         },
       ],
     },
+    presentation: {
+      title: "Juventude que cuida do território onde vive",
+      body: [
+        "O Guardiões do Território forma jovens das comunidades para atuarem como agentes ambientais: observando, cuidando e mobilizando o entorno.",
+        "A trilha formativa combina vivências em campo, estudo do território e ações práticas — plantios, mutirões de limpeza e monitoramento de áreas de proteção.",
+        "É um projeto de pertencimento: reconhecer que o território é casa comum e que sua defesa começa pelas pessoas que ali vivem.",
+      ],
+    },
+
+
 
     objectives: [
       "Formar jovens agentes ambientais comprometidos com o território.",
