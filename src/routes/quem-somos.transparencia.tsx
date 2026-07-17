@@ -124,7 +124,7 @@ function Transparencia() {
 
 
       {/* Accordions compactos */}
-      <section className="pb-16 md:pb-20">
+      <section className="pb-10 md:pb-12">
         <div className="mx-auto max-w-3xl px-4 space-y-2.5">
           {transparencyCategories.map((c) => {
             const docs = byCategory.get(c) ?? [];
