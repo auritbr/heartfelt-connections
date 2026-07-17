@@ -42,15 +42,15 @@ export function FloatingButtons() {
       </div>
 
       {/* Right-bottom stack — WhatsApp; VLibras widget mounts itself */}
-      <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3">
+      <div className="fixed bottom-3 right-4 z-40 flex flex-col items-end gap-2.5 md:bottom-6">
         {showTop && (
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Voltar ao topo"
-            className="grid h-11 w-11 place-items-center rounded-full bg-background text-foreground border shadow-lg hover:bg-secondary"
+            className="grid h-10 w-10 place-items-center rounded-full bg-background text-foreground border shadow-md hover:bg-secondary"
           >
-            <ArrowUp className="h-5 w-5" />
+            <ArrowUp className="h-4 w-4" />
           </button>
         )}
         <a
@@ -58,10 +58,28 @@ export function FloatingButtons() {
           target="_blank"
           rel="noreferrer noopener"
           aria-label="Fale conosco pelo WhatsApp"
-          className="grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg hover:brightness-95"
-          style={{ marginBottom: "80px" }} /* leave space for VLibras widget which mounts bottom-right */
+          className="relative grid h-12 w-12 place-items-center rounded-full bg-[#25D366] text-white shadow-md hover:brightness-95"
+          style={{ marginBottom: "68px" }} /* clearance above VLibras widget */
         >
-          <MessageCircle className="h-6 w-6" />
+          {/* discreet botanical leaf tucked behind the outer button */}
+          <svg
+            aria-hidden
+            viewBox="0 0 24 24"
+            className="pointer-events-none absolute -left-2 -top-1 h-4 w-4 -rotate-[35deg] text-[color:var(--moss)] drop-shadow-sm"
+          >
+            <path
+              d="M3 21 C 3 10 10 3 21 3 C 21 14 14 21 3 21 Z"
+              fill="currentColor"
+            />
+            <path
+              d="M5 19 C 10 14 14 10 19 5"
+              stroke="rgba(255,255,255,0.55)"
+              strokeWidth="1.1"
+              fill="none"
+              strokeLinecap="round"
+            />
+          </svg>
+          <MessageCircle className="relative h-5 w-5" />
         </a>
       </div>
 
