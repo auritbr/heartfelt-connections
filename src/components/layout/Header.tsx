@@ -14,13 +14,23 @@ const nav = [
       { to: "/quem-somos/transparencia", label: "Transparência" },
     ],
   },
+  {
+    label: "Projetos",
+    to: "/projetos",
+    children: [
+      { to: "/projetos", label: "Todos os Projetos" },
+      { to: "/projetos/biblioteca-verde", label: "Biblioteca Verde" },
+      { to: "/projetos/guardioes-do-territorio", label: "Guardiões do Território" },
+      { to: "/projetos/cultura-que-floresce", label: "Cultura que Floresce" },
+    ],
+  },
   { to: "/noticias", label: "Notícias" },
   { to: "/galeria", label: "Galeria" },
   { to: "/contato", label: "Contato" },
 ] as const;
 
 // Rotas com hero fotográfico escuro — permitem header transparente no topo.
-const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/noticias", "/galeria", "/contato"];
+const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/projetos", "/noticias", "/galeria", "/contato"];
 const isHeroPath = (p: string) =>
   HERO_ROUTES.some((r) => (r === "/" ? p === "/" : p === r || p.startsWith(r + "/"))) ||
   /^\/noticias\/[^/]+$/.test(p);
