@@ -77,10 +77,22 @@ function Transparencia() {
         </g>
       </svg>
 
-      {/* Cabeçalho limpo */}
-      <section className="relative pt-32 md:pt-36 pb-10 md:pb-14">
-        <div className="container-narrow relative">
-          <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground">
+      {/* Hero — fundo ambiental + painel claro sobreposto */}
+      <section className="relative isolate overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2000&q=80&auto=format&fit=crop"
+            alt=""
+            aria-hidden
+            className="h-full w-full object-cover"
+            loading="eager"
+          />
+          {/* Camada escura no topo para contraste com o header claro + gradiente ambiental */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--forest)]/85 via-[color:var(--forest)]/55 to-[color:var(--forest)]/70" />
+        </div>
+
+        <div className="container-narrow relative pt-28 md:pt-36 pb-16 md:pb-24">
+          <nav aria-label="Breadcrumb" className="text-xs text-[color:var(--paper)]/85">
             <ol className="flex flex-wrap items-center gap-1">
               <li>
                 <Link to="/" className="hover:underline">Início</Link>
@@ -94,19 +106,22 @@ function Transparencia() {
             </ol>
           </nav>
 
-          <div className="mt-8 text-center max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--moss)]/30 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--moss)]">
+          {/* Painel institucional claro sobreposto */}
+          <div className="mt-8 mx-auto max-w-3xl rounded-3xl bg-white/95 backdrop-blur-sm border border-white/60 shadow-[0_30px_80px_-30px_rgba(20,50,30,0.45)] px-6 py-10 md:px-12 md:py-14 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--moss)]/30 bg-[color:var(--leaf)]/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--forest)]">
               <Archive className="h-3 w-3" /> Transparência
             </span>
             <h1 className="mt-5 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
               Acervo institucional
             </h1>
-            <p className="mt-3 text-sm md:text-base text-muted-foreground">
-              Consulte documentos, certificados, portfólios e relatórios organizados por categoria.
+            <p className="mt-4 mx-auto max-w-2xl text-sm md:text-base text-muted-foreground">
+              Acesse documentos, certificados, reconhecimentos, portfólios, relatórios e registros institucionais,
+              organizados por categoria para facilitar a consulta pública.
             </p>
           </div>
         </div>
       </section>
+
 
       {/* Accordions compactos */}
       <section className="pb-16 md:pb-20">
