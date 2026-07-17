@@ -18,12 +18,12 @@ const nav = [
     label: "Projetos",
     to: "/projetos",
     children: [
-      { to: "/projetos", label: "Todos os Projetos" },
       { to: "/projetos/biblioteca-verde", label: "Biblioteca Verde" },
       { to: "/projetos/guardioes-do-territorio", label: "Guardiões do Território" },
       { to: "/projetos/cultura-que-floresce", label: "Cultura que Floresce" },
     ],
   },
+
   { to: "/noticias", label: "Notícias" },
   { to: "/galeria", label: "Galeria" },
   { to: "/contato", label: "Contato" },
@@ -102,15 +102,24 @@ export function Header() {
         <nav className="hidden lg:flex items-center gap-1" aria-label="Menu principal">
           {nav.map((item) =>
             "children" in item && item.children ? (
-              <div key={item.label} className="group relative">
+              <div key={item.label} className="group relative flex items-center">
                 <Link
                   to={item.to}
-                  className={`inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium ${linkBase} data-[status=active]:text-[color:var(--ochre)]`}
+                  className={`rounded-md pl-3 pr-1.5 py-2 text-sm font-medium ${linkBase} data-[status=active]:text-[color:var(--ochre)]`}
                   activeOptions={{ exact: false }}
                 >
                   {item.label}
-                  <ChevronDown className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180" aria-hidden />
                 </Link>
+                <button
+                  type="button"
+                  className={`inline-flex items-center justify-center rounded-md pr-2 pl-1 py-2 ${linkBase}`}
+                  aria-label={`Abrir submenu ${item.label}`}
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  tabIndex={-1}
+                >
+                  <ChevronDown className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180" aria-hidden />
+                </button>
                 <div className="invisible absolute left-0 top-full w-60 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="overflow-hidden rounded-lg border bg-popover shadow-lg">
                     {item.children.map((c) => (
@@ -126,6 +135,7 @@ export function Header() {
                   </div>
                 </div>
               </div>
+
             ) : (
               <Link
                 key={item.to}
@@ -172,15 +182,26 @@ export function Header() {
             {nav.map((item) =>
               "children" in item && item.children ? (
                 <div key={item.label} className="rounded-md">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-semibold"
-                    aria-expanded={openSub === item.label}
-                    onClick={() => setOpenSub((v) => (v === item.label ? null : item.label))}
-                  >
-                    {item.label}
-                    <ChevronDown className={`h-4 w-4 transition-transform ${openSub === item.label ? "rotate-180" : ""}`} />
-                  </button>
+                  <div className="flex items-center">
+                    <Link
+                      to={item.to}
+                      onClick={() => setOpen(false)}
+                      className="flex-1 rounded-md px-3 py-3 text-left text-sm font-semibold hover:bg-secondary"
+                    >
+                      {item.label}
+                    </Link>
+                    <button
+                      type="button"
+                      className="ml-1 grid h-11 w-11 place-items-center rounded-md hover:bg-secondary"
+                      aria-label={`${openSub === item.label ? "Fechar" : "Abrir"} submenu ${item.label}`}
+                      aria-expanded={openSub === item.label}
+                      onClick={() => setOpenSub((v) => (v === item.label ? null : item.label))}
+                    >
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${openSub === item.label ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  </div>
                   {openSub === item.label && (
                     <div className="ml-3 border-l pl-3">
                       {item.children.map((c) => (
@@ -196,6 +217,7 @@ export function Header() {
                     </div>
                   )}
                 </div>
+
               ) : (
                 <Link
                   key={item.to}

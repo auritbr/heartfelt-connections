@@ -105,6 +105,18 @@ export type ProjectPage = {
   shortDescription: string;
   heroImage: string;
   accent: "forest" | "moss" | "river" | "ochre" | "earth";
+  about: {
+    title: string;
+    intro: string;
+    paragraphs: string[];
+    highlight?: string;
+    image: string;
+    imageCaption?: string;
+  };
+  cards: {
+    title: string;
+    items: { title: string; text: string; image: string }[];
+  };
   presentation: { title: string; body: string[] };
   objectives: string[];
   audiences: string[];
@@ -112,8 +124,9 @@ export type ProjectPage = {
   gallery: string[];
   linkedAlbumProject?: string; // matches albums[].project for filtering
   facts: { label: string; value: string }[];
-  cta: { title: string; text: string };
+  cta: { title: string; text: string; image: string };
 };
+
 
 export const projectPages: ProjectPage[] = [
   {
@@ -126,6 +139,49 @@ export const projectPages: ProjectPage[] = [
     heroImage:
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=2000&q=80&auto=format&fit=crop",
     accent: "forest",
+    about: {
+      title: "Sobre o projeto",
+      intro:
+        "A Biblioteca Verde é uma iniciativa dedicada à democratização do acesso à leitura, à circulação de conhecimentos e à formação de uma consciência ambiental conectada à realidade da comunidade.",
+      paragraphs: [
+        "O projeto reúne livros, publicações, materiais educativos e atividades culturais que estimulam diferentes formas de aprendizagem. Mais do que disponibilizar um acervo, a Biblioteca Verde busca criar um espaço de encontro, pesquisa, troca de experiências e valorização das histórias construídas no território.",
+        "As ações são desenvolvidas por meio de mediações de leitura, rodas de conversa, contação de histórias, oficinas, atividades intergeracionais e iniciativas que relacionam literatura, cultura e meio ambiente.",
+      ],
+      highlight:
+        "Ler é um gesto ambiental: cada página compartilhada fortalece o cuidado com o território e com a memória da comunidade.",
+      image:
+        "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1600&q=80&auto=format&fit=crop",
+      imageCaption: "Roda de leitura ao ar livre, na sede do Ponto de Cultura.",
+    },
+    cards: {
+      title: "Experiências da Biblioteca Verde",
+      items: [
+        {
+          title: "Mediação de leitura",
+          text: "Encontros que aproximam diferentes públicos dos livros e incentivam a interpretação, a escuta e o compartilhamento de ideias.",
+          image:
+            "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Contação de histórias",
+          text: "Experiências narrativas que estimulam imaginação, oralidade, memória e interesse pela leitura.",
+          image:
+            "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Acervo ambiental",
+          text: "Livros, cartilhas, publicações e materiais que abordam cultura, território, biodiversidade e sustentabilidade.",
+          image:
+            "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Encontros e oficinas",
+          text: "Atividades que integram literatura, produção criativa, educação ambiental e participação comunitária.",
+          image:
+            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&auto=format&fit=crop",
+        },
+      ],
+    },
     presentation: {
       title: "Um acervo que floresce junto com a comunidade",
       body: [
@@ -182,9 +238,12 @@ export const projectPages: ProjectPage[] = [
       { label: "Escolas parceiras", value: "12" },
     ],
     cta: {
-      title: "Visite a Biblioteca Verde",
-      text: "Consulte o acervo, participe das rodas de leitura e conheça o espaço aberto à comunidade.",
+      title: "Conhecimento para compartilhar e transformar",
+      text: "Conheça as atividades da Biblioteca Verde, participe dos encontros e descubra novas formas de aproximar leitura, cultura e meio ambiente.",
+      image:
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=80&auto=format&fit=crop",
     },
+
   },
   {
     slug: "guardioes-do-territorio",
@@ -196,6 +255,49 @@ export const projectPages: ProjectPage[] = [
     heroImage:
       "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=2000&q=80&auto=format&fit=crop",
     accent: "moss",
+    about: {
+      title: "Sobre o projeto",
+      intro:
+        "O Guardiões do Território é uma iniciativa de educação ambiental que forma crianças, jovens e adultos para atuarem como agentes protetores do meio ambiente em suas comunidades.",
+      paragraphs: [
+        "O projeto valoriza o vínculo entre as pessoas e o lugar onde vivem, reconhecendo que a preservação ambiental depende, antes de tudo, da relação afetiva com o território. Por meio de vivências, oficinas, atividades ao ar livre e ações práticas, o projeto fortalece o cuidado com a natureza e com os espaços comunitários.",
+        "As ações incluem trilhas ecológicas, mutirões ambientais, oficinas de sustentabilidade, práticas de agroecologia, monitoramento e cuidado com áreas verdes.",
+      ],
+      highlight:
+        "Cuidar do território é cuidar da vida — e esse cuidado se aprende, se pratica e se compartilha entre gerações.",
+      image:
+        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80&auto=format&fit=crop",
+      imageCaption: "Trilha formativa com jovens agentes ambientais.",
+    },
+    cards: {
+      title: "Caminhos de aprendizagem e cuidado",
+      items: [
+        {
+          title: "Trilhas ecológicas",
+          text: "Vivências guiadas que aproximam os participantes da fauna, da flora e do ciclo das águas do território.",
+          image:
+            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Mutirões ambientais",
+          text: "Ações coletivas de plantio, limpeza e restauração de espaços comunitários e áreas verdes.",
+          image:
+            "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Oficinas de sustentabilidade",
+          text: "Encontros formativos sobre agroecologia, resíduos, água, biodiversidade e práticas de vida sustentável.",
+          image:
+            "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Monitoramento comunitário",
+          text: "Práticas de observação e cuidado com nascentes, matas e áreas de proteção, junto às moradoras e moradores.",
+          image:
+            "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1200&q=80&auto=format&fit=crop",
+        },
+      ],
+    },
     presentation: {
       title: "Juventude que cuida do território onde vive",
       body: [
@@ -204,6 +306,9 @@ export const projectPages: ProjectPage[] = [
         "É um projeto de pertencimento: reconhecer que o território é casa comum e que sua defesa começa pelas pessoas que ali vivem.",
       ],
     },
+
+
+
     objectives: [
       "Formar jovens agentes ambientais comprometidos com o território.",
       "Monitorar áreas de proteção e nascentes junto à comunidade.",
@@ -251,10 +356,13 @@ export const projectPages: ProjectPage[] = [
       { label: "Nascentes monitoradas", value: "18" },
     ],
     cta: {
-      title: "Some-se aos Guardiões do Território",
-      text: "Escolas, jovens e voluntários podem participar das trilhas formativas e mutirões.",
+      title: "Cuidar do território é um gesto coletivo",
+      text: "Descubra as ações do Guardiões do Território, participe das atividades e some-se ao cuidado com o meio ambiente da comunidade.",
+      image:
+        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80&auto=format&fit=crop",
     },
   },
+
   {
     slug: "cultura-que-floresce",
     title: "Cultura que Floresce",
@@ -265,6 +373,49 @@ export const projectPages: ProjectPage[] = [
     heroImage:
       "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=2000&q=80&auto=format&fit=crop",
     accent: "ochre",
+    about: {
+      title: "Sobre o projeto",
+      intro:
+        "O Cultura que Floresce é um projeto dedicado à valorização da cultura local, à celebração das identidades comunitárias e ao fortalecimento das expressões artísticas produzidas no território.",
+      paragraphs: [
+        "A cultura é uma das raízes mais profundas de uma comunidade — é ela que preserva memórias, transmite saberes e sustenta o sentimento de pertencimento. Reconhecendo essa força, o projeto promove encontros culturais, apresentações, oficinas artísticas, atividades de valorização das tradições, festas comunitárias e ações que unem cultura popular, arte contemporânea e educação.",
+        "As ações são construídas de forma colaborativa, com participação de artistas locais, grupos culturais, mestras, mestres, jovens, crianças, famílias e educadores.",
+      ],
+      highlight:
+        "Cultura que floresce é território que se reconhece: cada expressão, cada saber e cada história fortalece a vida comunitária.",
+      image:
+        "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1600&q=80&auto=format&fit=crop",
+      imageCaption: "Oficina cultural aberta com participação intergeracional.",
+    },
+    cards: {
+      title: "Linguagens que fazem a cultura florescer",
+      items: [
+        {
+          title: "Oficinas artísticas",
+          text: "Vivências criativas em música, dança, artes visuais, teatro e literatura, abertas a diferentes públicos.",
+          image:
+            "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Encontros culturais",
+          text: "Rodas de conversa, apresentações e atividades que colocam a cultura local em movimento no território.",
+          image:
+            "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Memória viva",
+          text: "Registro e valorização de histórias, ofícios, receitas, cantos e saberes das mestras e mestres.",
+          image:
+            "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Festas e apresentações",
+          text: "Celebrações abertas que fortalecem os laços comunitários e projetam as expressões culturais do território.",
+          image:
+            "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&q=80&auto=format&fit=crop",
+        },
+      ],
+    },
     presentation: {
       title: "Cultura como raiz que floresce nas comunidades",
       body: [
@@ -273,6 +424,7 @@ export const projectPages: ProjectPage[] = [
         "É um projeto de valorização: reconhecer que cultura é território vivo e que a memória local é patrimônio de todas e de todos.",
       ],
     },
+
     objectives: [
       "Valorizar mestras e mestres da cultura popular do território.",
       "Registrar e difundir saberes, ofícios e narrativas locais.",
@@ -321,9 +473,12 @@ export const projectPages: ProjectPage[] = [
       { label: "Encontros abertos", value: "24/ano" },
     ],
     cta: {
-      title: "Participe do Cultura que Floresce",
-      text: "Inscreva-se nas oficinas, acompanhe os encontros e ajude a difundir a memória do território.",
+      title: "A cultura é feita com muitas mãos",
+      text: "Conheça as ações do Cultura que Floresce, participe das oficinas e some-se ao movimento que celebra a identidade do território.",
+      image:
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1400&q=80&auto=format&fit=crop",
     },
+
   },
 ];
 
