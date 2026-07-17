@@ -97,6 +97,236 @@ export const projects = [
   },
 ] as const;
 
+export type ProjectPage = {
+  slug: string;
+  title: string;
+  category: string;
+  eyebrow: string;
+  shortDescription: string;
+  heroImage: string;
+  accent: "forest" | "moss" | "river" | "ochre" | "earth";
+  presentation: { title: string; body: string[] };
+  objectives: string[];
+  audiences: string[];
+  activities: { name: string; summary: string; image: string }[];
+  gallery: string[];
+  linkedAlbumProject?: string; // matches albums[].project for filtering
+  facts: { label: string; value: string }[];
+  cta: { title: string; text: string };
+};
+
+export const projectPages: ProjectPage[] = [
+  {
+    slug: "biblioteca-verde",
+    title: "Biblioteca Verde",
+    category: "Leitura, cultura e educação ambiental",
+    eyebrow: "Projeto de leitura e território",
+    shortDescription:
+      "Um acervo vivo dedicado à natureza, à cultura local e à formação de leitores em contato com o meio ambiente.",
+    heroImage:
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=2000&q=80&auto=format&fit=crop",
+    accent: "forest",
+    presentation: {
+      title: "Um acervo que floresce junto com a comunidade",
+      body: [
+        "A Biblioteca Verde é o coração do nosso Ponto de Cultura: um espaço aberto, gratuito e acolhedor, onde leitura, meio ambiente e território caminham juntos.",
+        "Reúne livros sobre biodiversidade, agroecologia, cultura popular, literatura infantojuvenil e memória local, com mediações semanais para crianças, jovens, famílias e educadores.",
+        "Mais do que um acervo, é uma prática cotidiana de escuta, de encontro e de formação de leitores comprometidos com o cuidado com a vida.",
+      ],
+    },
+    objectives: [
+      "Ampliar o acesso gratuito a livros e materiais sobre meio ambiente e cultura.",
+      "Formar mediadores de leitura em diálogo com a educação ambiental.",
+      "Fortalecer a leitura como prática comunitária e territorial.",
+      "Valorizar autoras, autores e saberes locais no acervo.",
+    ],
+    audiences: [
+      "Crianças e adolescentes",
+      "Famílias das comunidades atendidas",
+      "Educadoras e educadores da rede pública",
+      "Público em geral interessado em leitura e território",
+    ],
+    activities: [
+      {
+        name: "Mediações de leitura",
+        summary:
+          "Encontros semanais com rodas de leitura ao ar livre e em salas acolhedoras da sede.",
+        image:
+          "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&q=80&auto=format&fit=crop",
+      },
+      {
+        name: "Clube de leitores do território",
+        summary:
+          "Grupo mensal que discute obras conectadas ao meio ambiente e à cultura local.",
+        image:
+          "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&q=80&auto=format&fit=crop",
+      },
+      {
+        name: "Formação de mediadores",
+        summary:
+          "Trilhas formativas para educadores e voluntários que atuam com leitura comunitária.",
+        image:
+          "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80&auto=format&fit=crop",
+      },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80&auto=format&fit=crop",
+    ],
+    linkedAlbumProject: "Biblioteca Verde",
+    facts: [
+      { label: "Títulos no acervo", value: "3.200+" },
+      { label: "Mediações por mês", value: "24" },
+      { label: "Escolas parceiras", value: "12" },
+    ],
+    cta: {
+      title: "Visite a Biblioteca Verde",
+      text: "Consulte o acervo, participe das rodas de leitura e conheça o espaço aberto à comunidade.",
+    },
+  },
+  {
+    slug: "guardioes-do-territorio",
+    title: "Guardiões do Território",
+    category: "Preservação ambiental e juventude",
+    eyebrow: "Projeto de formação e preservação",
+    shortDescription:
+      "Formação de jovens agentes ambientais para monitoramento, mobilização e defesa das áreas de proteção comunitária.",
+    heroImage:
+      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=2000&q=80&auto=format&fit=crop",
+    accent: "moss",
+    presentation: {
+      title: "Juventude que cuida do território onde vive",
+      body: [
+        "O Guardiões do Território forma jovens das comunidades para atuarem como agentes ambientais: observando, cuidando e mobilizando o entorno.",
+        "A trilha formativa combina vivências em campo, estudo do território e ações práticas — plantios, mutirões de limpeza e monitoramento de áreas de proteção.",
+        "É um projeto de pertencimento: reconhecer que o território é casa comum e que sua defesa começa pelas pessoas que ali vivem.",
+      ],
+    },
+    objectives: [
+      "Formar jovens agentes ambientais comprometidos com o território.",
+      "Monitorar áreas de proteção e nascentes junto à comunidade.",
+      "Realizar mutirões de plantio, limpeza e restauração ecológica.",
+      "Fortalecer a mobilização socioambiental local.",
+    ],
+    audiences: [
+      "Jovens de 15 a 24 anos das comunidades atendidas",
+      "Escolas públicas parceiras",
+      "Lideranças comunitárias e moradores voluntários",
+    ],
+    activities: [
+      {
+        name: "Trilhas formativas em campo",
+        summary:
+          "Vivências guiadas em áreas de proteção com estudo da fauna, flora e do ciclo das águas.",
+        image:
+          "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80&auto=format&fit=crop",
+      },
+      {
+        name: "Mutirões de plantio",
+        summary:
+          "Ações comunitárias de plantio de mudas nativas em áreas degradadas do território.",
+        image:
+          "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80&auto=format&fit=crop",
+      },
+      {
+        name: "Monitoramento de nascentes",
+        summary:
+          "Registro periódico do estado das nascentes com apoio técnico e escuta dos moradores.",
+        image:
+          "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=1200&q=80&auto=format&fit=crop",
+      },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop",
+    ],
+    linkedAlbumProject: "Guardiões do Território",
+    facts: [
+      { label: "Jovens formados", value: "120" },
+      { label: "Mudas plantadas", value: "8.400" },
+      { label: "Nascentes monitoradas", value: "18" },
+    ],
+    cta: {
+      title: "Some-se aos Guardiões do Território",
+      text: "Escolas, jovens e voluntários podem participar das trilhas formativas e mutirões.",
+    },
+  },
+  {
+    slug: "cultura-que-floresce",
+    title: "Cultura que Floresce",
+    category: "Cultura, memória e comunidade",
+    eyebrow: "Projeto cultural e comunitário",
+    shortDescription:
+      "Ações culturais que fortalecem a identidade local, valorizam mestras e mestres e celebram a memória viva do território.",
+    heroImage:
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=2000&q=80&auto=format&fit=crop",
+    accent: "ochre",
+    presentation: {
+      title: "Cultura como raiz que floresce nas comunidades",
+      body: [
+        "O Cultura que Floresce nasce da escuta das mestras e mestres das comunidades: aqueles que guardam ofícios, cantos, receitas e histórias.",
+        "Realiza encontros de saberes, oficinas culturais, apresentações abertas e registros audiovisuais que devolvem à comunidade sua própria memória.",
+        "É um projeto de valorização: reconhecer que cultura é território vivo e que a memória local é patrimônio de todas e de todos.",
+      ],
+    },
+    objectives: [
+      "Valorizar mestras e mestres da cultura popular do território.",
+      "Registrar e difundir saberes, ofícios e narrativas locais.",
+      "Promover oficinas culturais abertas à comunidade.",
+      "Fortalecer o Ponto de Cultura como espaço de encontro.",
+    ],
+    audiences: [
+      "Mestras e mestres da cultura popular",
+      "Crianças, jovens e famílias das comunidades",
+      "Grupos culturais e coletivos locais",
+      "Pesquisadores e educadores parceiros",
+    ],
+    activities: [
+      {
+        name: "Encontros de saberes",
+        summary:
+          "Rodas intergeracionais com mestras e mestres compartilhando ofícios e histórias.",
+        image:
+          "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&auto=format&fit=crop",
+      },
+      {
+        name: "Oficinas culturais",
+        summary:
+          "Artes visuais, escrita, música e expressões populares em diálogo com a natureza.",
+        image:
+          "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1200&q=80&auto=format&fit=crop",
+      },
+      {
+        name: "Memória viva",
+        summary:
+          "Registro audiovisual de narrativas comunitárias e paisagens do território.",
+        image:
+          "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1200&q=80&auto=format&fit=crop",
+      },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1400&q=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=80&auto=format&fit=crop",
+    ],
+    linkedAlbumProject: "Cultura e território",
+    facts: [
+      { label: "Mestras e mestres", value: "38" },
+      { label: "Oficinas realizadas", value: "72" },
+      { label: "Encontros abertos", value: "24/ano" },
+    ],
+    cta: {
+      title: "Participe do Cultura que Floresce",
+      text: "Inscreva-se nas oficinas, acompanhe os encontros e ajude a difundir a memória do território.",
+    },
+  },
+];
+
 export const newsCategories = [
   "Ação cultural",
   "Meio ambiente",

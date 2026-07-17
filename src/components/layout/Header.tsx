@@ -14,20 +14,30 @@ const nav = [
       { to: "/quem-somos/transparencia", label: "Transparência" },
     ],
   },
+  {
+    label: "Projetos",
+    to: "/projetos",
+    children: [
+      { to: "/projetos", label: "Todos os Projetos" },
+      { to: "/projetos/biblioteca-verde", label: "Biblioteca Verde" },
+      { to: "/projetos/guardioes-do-territorio", label: "Guardiões do Território" },
+      { to: "/projetos/cultura-que-floresce", label: "Cultura que Floresce" },
+    ],
+  },
   { to: "/noticias", label: "Notícias" },
   { to: "/galeria", label: "Galeria" },
   { to: "/contato", label: "Contato" },
 ] as const;
 
 // Rotas com hero fotográfico escuro — permitem header transparente no topo.
-const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/noticias", "/galeria", "/contato"];
+const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/projetos", "/noticias", "/galeria", "/contato"];
 const isHeroPath = (p: string) =>
   HERO_ROUTES.some((r) => (r === "/" ? p === "/" : p === r || p.startsWith(r + "/"))) ||
   /^\/noticias\/[^/]+$/.test(p);
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [subOpen, setSubOpen] = useState(false);
+  const [openSub, setOpenSub] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const overHero = isHeroPath(pathname);
@@ -165,13 +175,13 @@ export function Header() {
                   <button
                     type="button"
                     className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-semibold"
-                    aria-expanded={subOpen}
-                    onClick={() => setSubOpen((v) => !v)}
+                    aria-expanded={openSub === item.label}
+                    onClick={() => setOpenSub((v) => (v === item.label ? null : item.label))}
                   >
                     {item.label}
-                    <ChevronDown className={`h-4 w-4 transition-transform ${subOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`h-4 w-4 transition-transform ${openSub === item.label ? "rotate-180" : ""}`} />
                   </button>
-                  {subOpen && (
+                  {openSub === item.label && (
                     <div className="ml-3 border-l pl-3">
                       {item.children.map((c) => (
                         <Link

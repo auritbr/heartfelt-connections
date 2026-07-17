@@ -8,6 +8,9 @@ import { Lightbox } from "@/components/ui/Lightbox";
 import { Calendar, MapPin, Images, Tag } from "lucide-react";
 
 export const Route = createFileRoute("/galeria/")({
+  validateSearch: (search: Record<string, unknown>): { projeto?: string } => ({
+    projeto: typeof search.projeto === "string" ? search.projeto : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Galeria de Fotos — Instituto Raízes do Futuro" },
@@ -37,13 +40,16 @@ function GaleriaPage() {
     return list;
   }, [availableYears]);
 
+  const { projeto } = Route.useSearch();
   const [year, setYear] = useState<string>(yearsList[0] ?? "2026");
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const yearAlbums = albums.filter((a) =>
-    year === "Anteriores" ? Number(a.year) < 2022 : a.year === year,
-  );
+  const yearAlbums = albums.filter((a) => {
+    const yearMatch = year === "Anteriores" ? Number(a.year) < 2022 : a.year === year;
+    const projectMatch = !projeto || a.project === projeto;
+    return yearMatch && projectMatch;
+  });
 
   const activeAlbum = albums.find((a) => a.slug === activeSlug) ?? null;
   const lightboxPhotos = useMemo(
