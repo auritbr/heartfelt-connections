@@ -91,7 +91,7 @@ function Transparencia() {
           <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--forest)]/85 via-[color:var(--forest)]/55 to-[color:var(--forest)]/70" />
         </div>
 
-        <div className="container-narrow relative pt-28 md:pt-36 pb-16 md:pb-24">
+        <div className="container-narrow relative pt-28 md:pt-32 pb-24 md:pb-32">
           <nav aria-label="Breadcrumb" className="text-xs text-[color:var(--paper)]/85">
             <ol className="flex flex-wrap items-center gap-1">
               <li>
@@ -106,8 +106,26 @@ function Transparencia() {
             </ol>
           </nav>
 
-          {/* Painel institucional claro sobreposto */}
-          <div className="mt-8 mx-auto max-w-3xl rounded-3xl bg-white/95 backdrop-blur-sm border border-white/60 shadow-[0_30px_80px_-30px_rgba(20,50,30,0.45)] px-6 py-10 md:px-12 md:py-14 text-center">
+          {/* Painel institucional claro sobreposto (parcialmente sobre a imagem) */}
+          <div className="relative mt-8 mx-auto max-w-3xl rounded-3xl bg-white/95 backdrop-blur-sm border border-white/60 shadow-[0_30px_80px_-30px_rgba(20,50,30,0.45)] px-6 py-10 md:px-12 md:py-12 text-center mb-[-64px] md:mb-[-96px]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--moss)]/30 bg-[color:var(--leaf)]/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--forest)]">
+              <Archive className="h-3 w-3" /> Transparência
+            </span>
+            <h1 className="mt-5 font-display text-3xl md:text-4xl font-extrabold text-[color:var(--forest)]">
+              Acervo institucional
+            </h1>
+            <p className="mt-4 mx-auto max-w-2xl text-sm md:text-base text-muted-foreground">
+              Acesse documentos, certificados, reconhecimentos, portfólios, relatórios e registros institucionais,
+              organizados por categoria para facilitar a consulta pública.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Accordions compactos — com respiro do painel */}
+      <section className="pt-24 md:pt-32 pb-10 md:pb-12">
+
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--moss)]/30 bg-[color:var(--leaf)]/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--forest)]">
               <Archive className="h-3 w-3" /> Transparência
             </span>
