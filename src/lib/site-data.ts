@@ -139,6 +139,49 @@ export const projectPages: ProjectPage[] = [
     heroImage:
       "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=2000&q=80&auto=format&fit=crop",
     accent: "forest",
+    about: {
+      title: "Sobre o projeto",
+      intro:
+        "A Biblioteca Verde é uma iniciativa dedicada à democratização do acesso à leitura, à circulação de conhecimentos e à formação de uma consciência ambiental conectada à realidade da comunidade.",
+      paragraphs: [
+        "O projeto reúne livros, publicações, materiais educativos e atividades culturais que estimulam diferentes formas de aprendizagem. Mais do que disponibilizar um acervo, a Biblioteca Verde busca criar um espaço de encontro, pesquisa, troca de experiências e valorização das histórias construídas no território.",
+        "As ações são desenvolvidas por meio de mediações de leitura, rodas de conversa, contação de histórias, oficinas, atividades intergeracionais e iniciativas que relacionam literatura, cultura e meio ambiente.",
+      ],
+      highlight:
+        "Ler é um gesto ambiental: cada página compartilhada fortalece o cuidado com o território e com a memória da comunidade.",
+      image:
+        "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1600&q=80&auto=format&fit=crop",
+      imageCaption: "Roda de leitura ao ar livre, na sede do Ponto de Cultura.",
+    },
+    cards: {
+      title: "Experiências da Biblioteca Verde",
+      items: [
+        {
+          title: "Mediação de leitura",
+          text: "Encontros que aproximam diferentes públicos dos livros e incentivam a interpretação, a escuta e o compartilhamento de ideias.",
+          image:
+            "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Contação de histórias",
+          text: "Experiências narrativas que estimulam imaginação, oralidade, memória e interesse pela leitura.",
+          image:
+            "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Acervo ambiental",
+          text: "Livros, cartilhas, publicações e materiais que abordam cultura, território, biodiversidade e sustentabilidade.",
+          image:
+            "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Encontros e oficinas",
+          text: "Atividades que integram literatura, produção criativa, educação ambiental e participação comunitária.",
+          image:
+            "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&q=80&auto=format&fit=crop",
+        },
+      ],
+    },
     presentation: {
       title: "Um acervo que floresce junto com a comunidade",
       body: [
@@ -195,9 +238,12 @@ export const projectPages: ProjectPage[] = [
       { label: "Escolas parceiras", value: "12" },
     ],
     cta: {
-      title: "Visite a Biblioteca Verde",
-      text: "Consulte o acervo, participe das rodas de leitura e conheça o espaço aberto à comunidade.",
+      title: "Conhecimento para compartilhar e transformar",
+      text: "Conheça as atividades da Biblioteca Verde, participe dos encontros e descubra novas formas de aproximar leitura, cultura e meio ambiente.",
+      image:
+        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=80&auto=format&fit=crop",
     },
+
   },
   {
     slug: "guardioes-do-territorio",
