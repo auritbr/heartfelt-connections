@@ -18,12 +18,12 @@ const nav = [
     label: "Projetos",
     to: "/projetos",
     children: [
-      { to: "/projetos", label: "Todos os Projetos" },
       { to: "/projetos/biblioteca-verde", label: "Biblioteca Verde" },
       { to: "/projetos/guardioes-do-territorio", label: "Guardiões do Território" },
       { to: "/projetos/cultura-que-floresce", label: "Cultura que Floresce" },
     ],
   },
+
   { to: "/noticias", label: "Notícias" },
   { to: "/galeria", label: "Galeria" },
   { to: "/contato", label: "Contato" },
