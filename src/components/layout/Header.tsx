@@ -37,7 +37,7 @@ const isHeroPath = (p: string) =>
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [subOpen, setSubOpen] = useState(false);
+  const [openSub, setOpenSub] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const overHero = isHeroPath(pathname);
