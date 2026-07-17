@@ -8,6 +8,9 @@ import { Lightbox } from "@/components/ui/Lightbox";
 import { Calendar, MapPin, Images, Tag } from "lucide-react";
 
 export const Route = createFileRoute("/galeria/")({
+  validateSearch: (search: Record<string, unknown>): { projeto?: string } => ({
+    projeto: typeof search.projeto === "string" ? search.projeto : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Galeria de Fotos — Instituto Raízes do Futuro" },
