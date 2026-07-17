@@ -3,7 +3,6 @@ import { useState } from "react";
 import { news, formatDate, type NewsItem, type NewsPhoto } from "@/lib/site-data";
 import { Lightbox } from "@/components/ui/Lightbox";
 import {
-  ArrowLeft,
   ArrowRight,
   ChevronRight,
   Clock,
