@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PageHero } from "@/components/layout/PageHero";
 import { news, formatDate, newsCategories } from "@/lib/site-data";
-import { ArrowRight, Search, X, Filter } from "lucide-react";
+import { ArrowRight, Search, X, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/noticias/")({
   head: () => ({
@@ -213,7 +213,7 @@ function NoticiasPage() {
 
           {/* Grade — todas as notícias no mesmo padrão */}
           {shown.length > 0 && (
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div id="noticias-grid" className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {shown.map((n) => (
                 <article
                   key={n.slug}
@@ -249,19 +249,55 @@ function NoticiasPage() {
             </div>
           )}
 
-          {page < totalPages && (
-            <div className="mt-10 text-center">
+          {/* Paginação numérica */}
+          {totalPages > 1 && (
+            <nav aria-label="Paginação de notícias" className="mt-10 flex flex-wrap items-center justify-center gap-1.5">
               <button
                 type="button"
-                onClick={() => setPage((p) => p + 1)}
-                className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold hover:bg-secondary"
+                onClick={() => goTo(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="inline-flex h-10 items-center gap-1 rounded-full border border-[color:var(--moss)]/30 bg-card px-3 text-xs font-semibold text-[color:var(--forest)] transition hover:bg-[color:var(--leaf)]/40 disabled:pointer-events-none disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--moss)]"
+                aria-label="Página anterior"
               >
-                Carregar mais notícias
+                <ChevronLeft className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Anterior</span>
               </button>
-            </div>
+              {pageItems.map((it, i) =>
+                it === "…" ? (
+                  <span key={`e-${i}`} aria-hidden className="grid h-10 w-8 place-items-center text-sm text-muted-foreground">
+                    …
+                  </span>
+                ) : (
+                  <button
+                    key={it}
+                    type="button"
+                    onClick={() => goTo(it)}
+                    aria-current={it === currentPage ? "page" : undefined}
+                    className={`inline-flex h-10 min-w-10 items-center justify-center rounded-full px-3 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--moss)] ${
+                      it === currentPage
+                        ? "bg-[color:var(--forest)] text-[color:var(--paper)] shadow-sm"
+                        : "border border-[color:var(--moss)]/30 bg-card text-[color:var(--forest)] hover:bg-[color:var(--leaf)]/40"
+                    }`}
+                  >
+                    {it}
+                  </button>
+                )
+              )}
+              <button
+                type="button"
+                onClick={() => goTo(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="inline-flex h-10 items-center gap-1 rounded-full border border-[color:var(--moss)]/30 bg-card px-3 text-xs font-semibold text-[color:var(--forest)] transition hover:bg-[color:var(--leaf)]/40 disabled:pointer-events-none disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[color:var(--moss)]"
+                aria-label="Próxima página"
+              >
+                <span className="hidden sm:inline">Próxima</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </nav>
           )}
         </div>
       </section>
+
 
       {/* CTA institucional final */}
       <section className="section-y bg-[color:var(--forest)] text-[color:var(--paper)]">
