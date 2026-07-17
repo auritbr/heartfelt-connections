@@ -356,10 +356,13 @@ export const projectPages: ProjectPage[] = [
       { label: "Nascentes monitoradas", value: "18" },
     ],
     cta: {
-      title: "Some-se aos Guardiões do Território",
-      text: "Escolas, jovens e voluntários podem participar das trilhas formativas e mutirões.",
+      title: "Cuidar do território é um gesto coletivo",
+      text: "Descubra as ações do Guardiões do Território, participe das atividades e some-se ao cuidado com o meio ambiente da comunidade.",
+      image:
+        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1400&q=80&auto=format&fit=crop",
     },
   },
+
   {
     slug: "cultura-que-floresce",
     title: "Cultura que Floresce",
