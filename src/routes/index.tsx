@@ -382,29 +382,8 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 8. CHAMADA FINAL — ochre/terracota */}
-      <section className="relative isolate overflow-hidden bg-[color:var(--ochre)]">
-        <div className="absolute inset-0 opacity-25">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2000&q=80&auto=format&fit=crop" alt="" aria-hidden className="h-full w-full object-cover mix-blend-multiply" />
-        </div>
-        <div className="container-narrow relative py-20 md:py-24 text-center text-[color:var(--forest)]">
-          <BranchLine className="mx-auto h-16 w-16 text-[color:var(--forest)]/60" />
-          <h2 className="mt-4 font-display text-4xl md:text-5xl font-extrabold max-w-3xl mx-auto leading-tight">
-            Cada transformação começa com uma aproximação
-          </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-[color:var(--forest)]/85 text-lg">
-            Participe das atividades, proponha parcerias, acompanhe as ações ou ajude a fortalecer esse trabalho.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/contato" className="inline-flex items-center rounded-full bg-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">Entre em contato</Link>
-            <Link to="/noticias" className="inline-flex items-center rounded-full border-2 border-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--forest)] hover:bg-[color:var(--forest)]/10">Conheça nossas ações</Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 9. PARCEIROS */}
-      <section className="section-y">
+      {/* 8. PARCEIROS — antes do fecho */}
+      <section className="py-14 md:py-20">
         <div className="container-narrow">
           <div className="flex flex-col items-center text-center gap-3 reveal">
             <Handshake className="h-6 w-6 text-[color:var(--moss)]" />
@@ -421,31 +400,26 @@ function HomePage() {
         </div>
       </section>
 
-      {/* 10. NEWSLETTER */}
-      <section className="bg-[color:var(--paper)] paper-texture border-t">
-        <div className="container-narrow py-14 grid gap-8 md:grid-cols-2 md:items-center">
-          <div>
-            <h2 className="font-display text-2xl md:text-3xl font-extrabold text-[color:var(--forest)]">Receba nossas novidades</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Informativo com projetos, oficinas, editais e chamadas do Ponto de Cultura.</p>
+      {/* 9. CHAMADA FINAL — fecho da página, próxima ao footer */}
+      <section className="relative isolate overflow-hidden bg-[color:var(--ochre)]">
+        <div className="absolute inset-0 opacity-25">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=2000&q=80&auto=format&fit=crop" alt="" aria-hidden className="h-full w-full object-cover mix-blend-multiply" />
+        </div>
+        <div className="container-narrow relative py-16 md:py-20 text-center text-[color:var(--forest)]">
+          <BranchLine className="mx-auto h-14 w-14 text-[color:var(--forest)]/60" />
+          <h2 className="mt-3 font-display text-3xl md:text-5xl font-extrabold max-w-3xl mx-auto leading-tight">
+            Cada transformação começa com uma aproximação
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-[color:var(--forest)]/85 text-base md:text-lg">
+            Participe das atividades, proponha parcerias, acompanhe as ações ou ajude a fortalecer esse trabalho.
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <Link to="/contato" className="inline-flex items-center rounded-full bg-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">Entre em contato</Link>
+            <Link to="/noticias" className="inline-flex items-center rounded-full border-2 border-[color:var(--forest)] px-7 py-3 text-sm font-semibold text-[color:var(--forest)] hover:bg-[color:var(--forest)]/10">Conheça nossas ações</Link>
           </div>
-          <form
-            onSubmit={(e) => { e.preventDefault(); (e.currentTarget as HTMLFormElement).reset(); alert("Obrigado! Inscrição registrada."); }}
-            className="grid gap-3"
-          >
-            <div className="grid gap-3 sm:grid-cols-2">
-              <input required name="name" placeholder="Nome" aria-label="Nome" className="rounded-md border bg-background px-3 py-2.5 text-sm" />
-              <input required type="email" name="email" placeholder="E-mail" aria-label="E-mail" className="rounded-md border bg-background px-3 py-2.5 text-sm" />
-            </div>
-            <label className="flex gap-2 text-xs text-muted-foreground">
-              <input required type="checkbox" className="mt-0.5 h-4 w-4 accent-[color:var(--forest)]" />
-              <span>Autorizo o envio de comunicações institucionais, conforme a <Link to="/politica-de-privacidade" className="underline">Política de Privacidade</Link>.</span>
-            </label>
-            <button type="submit" className="justify-self-start inline-flex items-center gap-2 rounded-full bg-[color:var(--forest)] px-5 py-2.5 text-sm font-semibold text-[color:var(--paper)] hover:bg-[color:var(--moss)]">
-              Inscrever-me <ArrowRight className="h-4 w-4" />
-            </button>
-          </form>
         </div>
       </section>
+
     </>
   );
 }
