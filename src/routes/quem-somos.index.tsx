@@ -185,7 +185,7 @@ function QuemSomos() {
       </section>
 
       {/* CTA final */}
-      <section className="pb-12 md:pb-16">
+      <section className="pb-10 md:pb-14">
         <div className="container-narrow">
           <div className="relative overflow-hidden rounded-3xl border bg-[color:var(--leaf)]/30 p-8 md:p-12 text-center">
             <svg

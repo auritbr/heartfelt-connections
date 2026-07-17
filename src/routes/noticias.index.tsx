@@ -22,6 +22,19 @@ const PAGE = 6;
 const allYears = Array.from(new Set(news.map((n) => n.date.slice(0, 4)))).sort((a, b) => b.localeCompare(a));
 const YEAR_BUCKETS = ["2026", "2025", "2024", "2023"];
 
+function getPageItems(current: number, total: number): (number | "…")[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const items: (number | "…")[] = [1];
+  const left = Math.max(2, current - 1);
+  const right = Math.min(total - 1, current + 1);
+  if (left > 2) items.push("…");
+  for (let i = left; i <= right; i++) items.push(i);
+  if (right < total - 1) items.push("…");
+  items.push(total);
+  return items;
+}
+
+
 function NoticiasPage() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string>("Todas");
@@ -58,9 +71,23 @@ function NoticiasPage() {
   };
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE));
-  const shown = filtered.slice(0, page * PAGE);
+  const currentPage = Math.min(page, totalPages);
+  const startIdx = (currentPage - 1) * PAGE;
+  const shown = filtered.slice(startIdx, startIdx + PAGE);
+
+  const goTo = (p: number) => {
+    const target = Math.min(Math.max(1, p), totalPages);
+    setPage(target);
+    if (typeof window !== "undefined") {
+      const el = document.getElementById("noticias-grid");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const pageItems = getPageItems(currentPage, totalPages);
 
   const yearsForSelect = ["Todos", ...YEAR_BUCKETS.filter((y) => allYears.includes(y)), "Anteriores"];
+
 
   return (
     <>
