@@ -300,7 +300,7 @@ function NoticiasPage() {
 
 
       {/* CTA institucional final */}
-      <section className="section-y bg-[color:var(--forest)] text-[color:var(--paper)]">
+      <section className="py-12 md:py-16 bg-[color:var(--forest)] text-[color:var(--paper)]">
         <div className="container-narrow grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--leaf)]">Faça parte</p>
