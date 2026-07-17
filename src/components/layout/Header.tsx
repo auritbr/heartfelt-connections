@@ -175,13 +175,13 @@ export function Header() {
                   <button
                     type="button"
                     className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-semibold"
-                    aria-expanded={subOpen}
-                    onClick={() => setSubOpen((v) => !v)}
+                    aria-expanded={openSub === item.label}
+                    onClick={() => setOpenSub((v) => (v === item.label ? null : item.label))}
                   >
                     {item.label}
-                    <ChevronDown className={`h-4 w-4 transition-transform ${subOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`h-4 w-4 transition-transform ${openSub === item.label ? "rotate-180" : ""}`} />
                   </button>
-                  {subOpen && (
+                  {openSub === item.label && (
                     <div className="ml-3 border-l pl-3">
                       {item.children.map((c) => (
                         <Link
