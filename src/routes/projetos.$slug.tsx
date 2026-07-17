@@ -7,8 +7,10 @@ import { projectPages, news } from "@/lib/site-data";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { ArrowRight, Target, Users, Sparkles, Images, ChevronRight } from "lucide-react";
 
+import type { ProjectPage } from "@/lib/site-data";
+
 export const Route = createFileRoute("/projetos/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { project: ProjectPage } => {
     const project = projectPages.find((p) => p.slug === params.slug);
     if (!project) throw notFound();
     return { project };

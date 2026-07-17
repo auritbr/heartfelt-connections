@@ -20,6 +20,7 @@ import { Route as NoticiasIndexRouteImport } from './routes/noticias.index'
 import { Route as GaleriaIndexRouteImport } from './routes/galeria.index'
 import { Route as QuemSomosTransparenciaRouteImport } from './routes/quem-somos.transparencia'
 import { Route as QuemSomosEquipeRouteImport } from './routes/quem-somos.equipe'
+import { Route as ProjetosSlugRouteImport } from './routes/projetos.$slug'
 import { Route as NoticiasSlugRouteImport } from './routes/noticias.$slug'
 
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
@@ -77,6 +78,11 @@ const QuemSomosEquipeRoute = QuemSomosEquipeRouteImport.update({
   path: '/quem-somos/equipe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjetosSlugRoute = ProjetosSlugRouteImport.update({
+  id: '/projetos/$slug',
+  path: '/projetos/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NoticiasSlugRoute = NoticiasSlugRouteImport.update({
   id: '/noticias/$slug',
   path: '/noticias/$slug',
@@ -90,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/transparencia': typeof QuemSomosTransparenciaRoute
   '/galeria/': typeof GaleriaIndexRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/transparencia': typeof QuemSomosTransparenciaRoute
   '/galeria': typeof GaleriaIndexRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
   '/noticias/$slug': typeof NoticiasSlugRoute
+  '/projetos/$slug': typeof ProjetosSlugRoute
   '/quem-somos/equipe': typeof QuemSomosEquipeRoute
   '/quem-somos/transparencia': typeof QuemSomosTransparenciaRoute
   '/galeria/': typeof GaleriaIndexRoute
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/termos-de-uso'
     | '/noticias/$slug'
+    | '/projetos/$slug'
     | '/quem-somos/equipe'
     | '/quem-somos/transparencia'
     | '/galeria/'
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/termos-de-uso'
     | '/noticias/$slug'
+    | '/projetos/$slug'
     | '/quem-somos/equipe'
     | '/quem-somos/transparencia'
     | '/galeria'
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/termos-de-uso'
     | '/noticias/$slug'
+    | '/projetos/$slug'
     | '/quem-somos/equipe'
     | '/quem-somos/transparencia'
     | '/galeria/'
@@ -178,6 +190,7 @@ export interface RootRouteChildren {
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
   NoticiasSlugRoute: typeof NoticiasSlugRoute
+  ProjetosSlugRoute: typeof ProjetosSlugRoute
   QuemSomosEquipeRoute: typeof QuemSomosEquipeRoute
   QuemSomosTransparenciaRoute: typeof QuemSomosTransparenciaRoute
   GaleriaIndexRoute: typeof GaleriaIndexRoute
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuemSomosEquipeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projetos/$slug': {
+      id: '/projetos/$slug'
+      path: '/projetos/$slug'
+      fullPath: '/projetos/$slug'
+      preLoaderRoute: typeof ProjetosSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/noticias/$slug': {
       id: '/noticias/$slug'
       path: '/noticias/$slug'
@@ -282,6 +302,7 @@ const rootRouteChildren: RootRouteChildren = {
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
   NoticiasSlugRoute: NoticiasSlugRoute,
+  ProjetosSlugRoute: ProjetosSlugRoute,
   QuemSomosEquipeRoute: QuemSomosEquipeRoute,
   QuemSomosTransparenciaRoute: QuemSomosTransparenciaRoute,
   GaleriaIndexRoute: GaleriaIndexRoute,
