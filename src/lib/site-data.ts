@@ -373,6 +373,49 @@ export const projectPages: ProjectPage[] = [
     heroImage:
       "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=2000&q=80&auto=format&fit=crop",
     accent: "ochre",
+    about: {
+      title: "Sobre o projeto",
+      intro:
+        "O Cultura que Floresce é um projeto dedicado à valorização da cultura local, à celebração das identidades comunitárias e ao fortalecimento das expressões artísticas produzidas no território.",
+      paragraphs: [
+        "A cultura é uma das raízes mais profundas de uma comunidade — é ela que preserva memórias, transmite saberes e sustenta o sentimento de pertencimento. Reconhecendo essa força, o projeto promove encontros culturais, apresentações, oficinas artísticas, atividades de valorização das tradições, festas comunitárias e ações que unem cultura popular, arte contemporânea e educação.",
+        "As ações são construídas de forma colaborativa, com participação de artistas locais, grupos culturais, mestras, mestres, jovens, crianças, famílias e educadores.",
+      ],
+      highlight:
+        "Cultura que floresce é território que se reconhece: cada expressão, cada saber e cada história fortalece a vida comunitária.",
+      image:
+        "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1600&q=80&auto=format&fit=crop",
+      imageCaption: "Oficina cultural aberta com participação intergeracional.",
+    },
+    cards: {
+      title: "Linguagens que fazem a cultura florescer",
+      items: [
+        {
+          title: "Oficinas artísticas",
+          text: "Vivências criativas em música, dança, artes visuais, teatro e literatura, abertas a diferentes públicos.",
+          image:
+            "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Encontros culturais",
+          text: "Rodas de conversa, apresentações e atividades que colocam a cultura local em movimento no território.",
+          image:
+            "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Memória viva",
+          text: "Registro e valorização de histórias, ofícios, receitas, cantos e saberes das mestras e mestres.",
+          image:
+            "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1200&q=80&auto=format&fit=crop",
+        },
+        {
+          title: "Festas e apresentações",
+          text: "Celebrações abertas que fortalecem os laços comunitários e projetam as expressões culturais do território.",
+          image:
+            "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&q=80&auto=format&fit=crop",
+        },
+      ],
+    },
     presentation: {
       title: "Cultura como raiz que floresce nas comunidades",
       body: [
@@ -381,6 +424,7 @@ export const projectPages: ProjectPage[] = [
         "É um projeto de valorização: reconhecer que cultura é território vivo e que a memória local é patrimônio de todas e de todos.",
       ],
     },
+
     objectives: [
       "Valorizar mestras e mestres da cultura popular do território.",
       "Registrar e difundir saberes, ofícios e narrativas locais.",
