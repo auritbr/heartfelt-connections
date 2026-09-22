@@ -3,7 +3,18 @@ import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown, Leaf } from "lucide-react";
 import { site } from "@/lib/site-data";
 
-const nav = [
+type ProjectSlug = "biblioteca-verde" | "guardioes-do-territorio" | "cultura-que-floresce";
+
+type NavChild =
+  | { to: "/quem-somos" | "/quem-somos/equipe" | "/quem-somos/transparencia"; label: string }
+  | { to: "/projetos/$slug"; label: string; params: { slug: ProjectSlug } };
+
+type NavItem =
+  | { to: "/" | "/noticias" | "/galeria" | "/contato"; label: string }
+  | { to: "/quem-somos"; label: string; children: NavChild[] }
+  | { to: "/projetos"; label: string; children: NavChild[] };
+
+const nav: NavItem[] = [
   { to: "/", label: "Início" },
   {
     label: "Quem Somos",
@@ -18,16 +29,15 @@ const nav = [
     label: "Projetos",
     to: "/projetos",
     children: [
-      { to: "/projetos/biblioteca-verde", label: "Biblioteca Verde" },
-      { to: "/projetos/guardioes-do-territorio", label: "Guardiões do Território" },
-      { to: "/projetos/cultura-que-floresce", label: "Cultura que Floresce" },
+      { to: "/projetos/$slug", params: { slug: "biblioteca-verde" }, label: "Biblioteca Verde" },
+      { to: "/projetos/$slug", params: { slug: "guardioes-do-territorio" }, label: "Guardiões do Território" },
+      { to: "/projetos/$slug", params: { slug: "cultura-que-floresce" }, label: "Cultura que Floresce" },
     ],
   },
-
   { to: "/noticias", label: "Notícias" },
   { to: "/galeria", label: "Galeria" },
   { to: "/contato", label: "Contato" },
-] as const;
+];
 
 // Rotas com hero fotográfico escuro — permitem header transparente no topo.
 const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/projetos", "/noticias", "/galeria", "/contato"];
