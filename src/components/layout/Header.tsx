@@ -3,7 +3,18 @@ import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown, Leaf } from "lucide-react";
 import { site } from "@/lib/site-data";
 
-const nav = [
+type ProjectSlug = "biblioteca-verde" | "guardioes-do-territorio" | "cultura-que-floresce";
+
+type NavChild =
+  | { to: "/quem-somos" | "/quem-somos/equipe" | "/quem-somos/transparencia"; label: string }
+  | { to: "/projetos/$slug"; label: string; params: { slug: ProjectSlug } };
+
+type NavItem =
+  | { to: "/" | "/noticias" | "/galeria" | "/contato"; label: string }
+  | { to: "/quem-somos"; label: string; children: NavChild[] }
+  | { to: "/projetos"; label: string; children: NavChild[] };
+
+const nav: NavItem[] = [
   { to: "/", label: "Início" },
   {
     label: "Quem Somos",
@@ -18,19 +29,34 @@ const nav = [
     label: "Projetos",
     to: "/projetos",
     children: [
-      { to: "/projetos/biblioteca-verde", label: "Biblioteca Verde" },
-      { to: "/projetos/guardioes-do-territorio", label: "Guardiões do Território" },
-      { to: "/projetos/cultura-que-floresce", label: "Cultura que Floresce" },
+      { to: "/projetos/$slug", params: { slug: "biblioteca-verde" }, label: "Biblioteca Verde" },
+      {
+        to: "/projetos/$slug",
+        params: { slug: "guardioes-do-territorio" },
+        label: "Guardiões do Território",
+      },
+      {
+        to: "/projetos/$slug",
+        params: { slug: "cultura-que-floresce" },
+        label: "Cultura que Floresce",
+      },
     ],
   },
-
   { to: "/noticias", label: "Notícias" },
   { to: "/galeria", label: "Galeria" },
   { to: "/contato", label: "Contato" },
-] as const;
+];
 
 // Rotas com hero fotográfico escuro — permitem header transparente no topo.
-const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/projetos", "/noticias", "/galeria", "/contato"];
+const HERO_ROUTES = [
+  "/",
+  "/quem-somos",
+  "/quem-somos/equipe",
+  "/projetos",
+  "/noticias",
+  "/galeria",
+  "/contato",
+];
 const isHeroPath = (p: string) =>
   HERO_ROUTES.some((r) => (r === "/" ? p === "/" : p === r || p.startsWith(r + "/"))) ||
   /^\/noticias\/[^/]+$/.test(p);
@@ -118,24 +144,38 @@ export function Header() {
                   aria-expanded="false"
                   tabIndex={-1}
                 >
-                  <ChevronDown className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180" aria-hidden />
+                  <ChevronDown
+                    className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180"
+                    aria-hidden
+                  />
                 </button>
                 <div className="invisible absolute left-0 top-full w-60 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="overflow-hidden rounded-lg border bg-popover shadow-lg">
-                    {item.children.map((c) => (
-                      <Link
-                        key={c.to}
-                        to={c.to}
-                        className="block px-4 py-2.5 text-sm text-popover-foreground hover:bg-secondary data-[status=active]:bg-secondary data-[status=active]:text-[color:var(--forest)]"
-                        activeOptions={{ exact: true }}
-                      >
-                        {c.label}
-                      </Link>
-                    ))}
+                    {item.children.map((c) =>
+                      "params" in c ? (
+                        <Link
+                          key={c.label}
+                          to={c.to}
+                          params={c.params}
+                          className="block px-4 py-2.5 text-sm text-popover-foreground hover:bg-secondary data-[status=active]:bg-secondary data-[status=active]:text-[color:var(--forest)]"
+                          activeOptions={{ exact: true }}
+                        >
+                          {c.label}
+                        </Link>
+                      ) : (
+                        <Link
+                          key={c.label}
+                          to={c.to}
+                          className="block px-4 py-2.5 text-sm text-popover-foreground hover:bg-secondary data-[status=active]:bg-secondary data-[status=active]:text-[color:var(--forest)]"
+                          activeOptions={{ exact: true }}
+                        >
+                          {c.label}
+                        </Link>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>
-
             ) : (
               <Link
                 key={item.to}
@@ -204,20 +244,31 @@ export function Header() {
                   </div>
                   {openSub === item.label && (
                     <div className="ml-3 border-l pl-3">
-                      {item.children.map((c) => (
-                        <Link
-                          key={c.to}
-                          to={c.to}
-                          onClick={() => setOpen(false)}
-                          className="block rounded-md px-3 py-2.5 text-sm text-foreground/80 hover:bg-secondary"
-                        >
-                          {c.label}
-                        </Link>
-                      ))}
+                      {item.children.map((c) =>
+                        "params" in c ? (
+                          <Link
+                            key={c.label}
+                            to={c.to}
+                            params={c.params}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-md px-3 py-2.5 text-sm text-foreground/80 hover:bg-secondary"
+                          >
+                            {c.label}
+                          </Link>
+                        ) : (
+                          <Link
+                            key={c.label}
+                            to={c.to}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-md px-3 py-2.5 text-sm text-foreground/80 hover:bg-secondary"
+                          >
+                            {c.label}
+                          </Link>
+                        ),
+                      )}
                     </div>
                   )}
                 </div>
-
               ) : (
                 <Link
                   key={item.to}
