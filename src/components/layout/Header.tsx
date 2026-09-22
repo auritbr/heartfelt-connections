@@ -30,8 +30,16 @@ const nav: NavItem[] = [
     to: "/projetos",
     children: [
       { to: "/projetos/$slug", params: { slug: "biblioteca-verde" }, label: "Biblioteca Verde" },
-      { to: "/projetos/$slug", params: { slug: "guardioes-do-territorio" }, label: "Guardiões do Território" },
-      { to: "/projetos/$slug", params: { slug: "cultura-que-floresce" }, label: "Cultura que Floresce" },
+      {
+        to: "/projetos/$slug",
+        params: { slug: "guardioes-do-territorio" },
+        label: "Guardiões do Território",
+      },
+      {
+        to: "/projetos/$slug",
+        params: { slug: "cultura-que-floresce" },
+        label: "Cultura que Floresce",
+      },
     ],
   },
   { to: "/noticias", label: "Notícias" },
@@ -40,7 +48,15 @@ const nav: NavItem[] = [
 ];
 
 // Rotas com hero fotográfico escuro — permitem header transparente no topo.
-const HERO_ROUTES = ["/", "/quem-somos", "/quem-somos/equipe", "/projetos", "/noticias", "/galeria", "/contato"];
+const HERO_ROUTES = [
+  "/",
+  "/quem-somos",
+  "/quem-somos/equipe",
+  "/projetos",
+  "/noticias",
+  "/galeria",
+  "/contato",
+];
 const isHeroPath = (p: string) =>
   HERO_ROUTES.some((r) => (r === "/" ? p === "/" : p === r || p.startsWith(r + "/"))) ||
   /^\/noticias\/[^/]+$/.test(p);
@@ -128,7 +144,10 @@ export function Header() {
                   aria-expanded="false"
                   tabIndex={-1}
                 >
-                  <ChevronDown className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180" aria-hidden />
+                  <ChevronDown
+                    className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180"
+                    aria-hidden
+                  />
                 </button>
                 <div className="invisible absolute left-0 top-full w-60 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="overflow-hidden rounded-lg border bg-popover shadow-lg">
@@ -157,7 +176,6 @@ export function Header() {
                   </div>
                 </div>
               </div>
-
             ) : (
               <Link
                 key={item.to}
@@ -251,7 +269,6 @@ export function Header() {
                     </div>
                   )}
                 </div>
-
               ) : (
                 <Link
                   key={item.to}
