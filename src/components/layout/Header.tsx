@@ -132,16 +132,28 @@ export function Header() {
                 </button>
                 <div className="invisible absolute left-0 top-full w-60 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                   <div className="overflow-hidden rounded-lg border bg-popover shadow-lg">
-                    {item.children.map((c) => (
-                      <Link
-                        key={c.to}
-                        to={c.to}
-                        className="block px-4 py-2.5 text-sm text-popover-foreground hover:bg-secondary data-[status=active]:bg-secondary data-[status=active]:text-[color:var(--forest)]"
-                        activeOptions={{ exact: true }}
-                      >
-                        {c.label}
-                      </Link>
-                    ))}
+                    {item.children.map((c) =>
+                      "params" in c ? (
+                        <Link
+                          key={c.label}
+                          to={c.to}
+                          params={c.params}
+                          className="block px-4 py-2.5 text-sm text-popover-foreground hover:bg-secondary data-[status=active]:bg-secondary data-[status=active]:text-[color:var(--forest)]"
+                          activeOptions={{ exact: true }}
+                        >
+                          {c.label}
+                        </Link>
+                      ) : (
+                        <Link
+                          key={c.label}
+                          to={c.to}
+                          className="block px-4 py-2.5 text-sm text-popover-foreground hover:bg-secondary data-[status=active]:bg-secondary data-[status=active]:text-[color:var(--forest)]"
+                          activeOptions={{ exact: true }}
+                        >
+                          {c.label}
+                        </Link>
+                      ),
+                    )}
                   </div>
                 </div>
               </div>
@@ -214,16 +226,28 @@ export function Header() {
                   </div>
                   {openSub === item.label && (
                     <div className="ml-3 border-l pl-3">
-                      {item.children.map((c) => (
-                        <Link
-                          key={c.to}
-                          to={c.to}
-                          onClick={() => setOpen(false)}
-                          className="block rounded-md px-3 py-2.5 text-sm text-foreground/80 hover:bg-secondary"
-                        >
-                          {c.label}
-                        </Link>
-                      ))}
+                      {item.children.map((c) =>
+                        "params" in c ? (
+                          <Link
+                            key={c.label}
+                            to={c.to}
+                            params={c.params}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-md px-3 py-2.5 text-sm text-foreground/80 hover:bg-secondary"
+                          >
+                            {c.label}
+                          </Link>
+                        ) : (
+                          <Link
+                            key={c.label}
+                            to={c.to}
+                            onClick={() => setOpen(false)}
+                            className="block rounded-md px-3 py-2.5 text-sm text-foreground/80 hover:bg-secondary"
+                          >
+                            {c.label}
+                          </Link>
+                        ),
+                      )}
                     </div>
                   )}
                 </div>
